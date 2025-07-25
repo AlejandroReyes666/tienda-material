@@ -1,6 +1,32 @@
 {
   "productos": [
-    { "id": 1, "nombre": "Pan artesanal", "precio": 4500, "categoria": "Panadería" },
-    { "id": 2, "nombre": "Croissant", "precio": 3200, "categoria": "Panadería" }
+    {
+      "id": 1,
+      "nombre": "Pan artesanal",
+      "precio": 4500,
+      "categoria": "Panadería"
+    },
+    {
+      "id": 2,
+      "nombre": "Croissant",
+      "precio": 3200,
+      "categoria": "Panadería"
+    }
+  ],
+  "contactos": [
+    {
+      "id": "51b2",
+      "name": "Mario Reyes",
+      "email": "correo@gmail.com",
+      "phone": "3112001298",
+      "message": "es un mensaje de prueba  para verificar el servicio"
+    },
+    {
+      "id": "011b",
+      "name": "pepito perez",
+      "email": "correo@hotmail.com",
+      "phone": "3112001294",
+      "message": "es un mensaje de prueba  para verificar el servicio 2"
+    }
   ]
 }

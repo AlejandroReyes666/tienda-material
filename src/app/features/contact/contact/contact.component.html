@@ -1,1 +1,39 @@
-<p>contact works!</p>
+<div class="form-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Nombre</mat-label>
+    <input matInput [formControl]="controls.name" (blur)="updateErrorMessage('name', controls.name)" />
+    @if (controls.name.invalid) {
+      <mat-error>{{ errorMessages.name() }}</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Correo</mat-label>
+    <input matInput [formControl]="controls.email" (blur)="updateErrorMessage('email', controls.email)" />
+    @if (controls.email.invalid) {
+      <mat-error>{{ errorMessages.email() }}</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Teléfono</mat-label>
+    <input matInput [formControl]="controls.phone" (blur)="updateErrorMessage('phone', controls.phone)" />
+    @if (controls.phone.invalid) {
+      <mat-error>{{ errorMessages.phone() }}</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Mensaje</mat-label>
+    <textarea matInput rows="5" [formControl]="controls.message" (blur)="updateErrorMessage('message', controls.message)"></textarea>
+    @if (controls.message.invalid) {
+      <mat-error>{{ errorMessages.message() }}</mat-error>
+    }
+  </mat-form-field>
+
+  <button class="btn btn-primary" mat-raised-button color="primary" 
+  [disabled]="contact.invalid" 
+  (click)="enviarFormulario()" >
+    Enviar
+</button>
+</div>
