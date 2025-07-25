@@ -1,0 +1,6 @@
+{
+  "productos": [
+    { "id": 1, "nombre": "Pan artesanal", "precio": 4500, "categoria": "Panadería" },
+    { "id": 2, "nombre": "Croissant", "precio": 3200, "categoria": "Panadería" }
+  ]
+}

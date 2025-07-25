@@ -1,0 +1,17 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+a.actived {
+  background-color: #cce0ff;
+  color: #0056b3;
+  border-radius: 999px;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+
+a[mat-button]:hover {
+  background-color: rgba(204, 224, 255, 0.3);
+}
