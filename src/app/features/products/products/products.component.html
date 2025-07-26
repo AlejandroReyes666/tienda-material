@@ -1,5 +1,11 @@
 
 <!-- productos.component.html -->
+ <div class="flex justify-end mb-4">
+  <button mat-raised-button color="primary" (click)="openDialog()">
+    Agregar Producto
+  </button>
+</div>
+
 <section *ngIf="productos.length > 0; else sinProductos">
   <div class="producto-container"> 
     <div *ngFor="let producto of productos" class="producto">
