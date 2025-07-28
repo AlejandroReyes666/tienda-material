@@ -39,6 +39,7 @@ export class ProductsComponent implements OnInit,OnDestroy{
     if (result) {
       if (product) {
         // editar
+        console.log(" el producto resibido es ", product);
         this.serviceProducto.updateProduct(product.id, result).subscribe(() => this.obtenerProductos());
       } else {
         // crear
@@ -47,6 +48,8 @@ export class ProductsComponent implements OnInit,OnDestroy{
     }
   });
 }
+
+
 
 eliminarProducto(id: number): void {
   this.serviceProducto.deleteProduct(id).subscribe(() => this.obtenerProductos());

@@ -7,11 +7,15 @@
 
   <img
     mat-card-image
-    src="https://material.angular.dev/assets/img/examples/shiba2.jpg"
+    src={{Product.imageUrl}}
     alt="Foto del producto"
   />
 
   <mat-card-content>
     <p>{{Product.descripcion}}</p>
   </mat-card-content>
+  <mat-card-actions>
+    <button class="btn-info" matButton (click)="actualizarProducto()">Editar</button>
+    <button class="btn-danger " matButton (click)="eliminarProducto()">Eliminar</button>
+  </mat-card-actions>
 </mat-card>

@@ -1,7 +1,7 @@
 
 <!-- productos.component.html -->
  <div class="flex justify-end mb-4">
-  <button mat-raised-button color="primary" (click)="openDialog()">
+  <button mat-raised-button color="primary" (click)="openDialog()" fontIcon="home">
     Agregar Producto
   </button>
 </div>
@@ -9,16 +9,12 @@
 <section *ngIf="productos.length > 0; else sinProductos">
   <div class="producto-container"> 
     <div *ngFor="let producto of productos" class="producto">
-        <app-product [Product]="producto"></app-product>    
+        <app-product [Product]="producto" (eliminar)="eliminarProducto($event)" (editar)="openDialog(producto)"></app-product>    
     </div>
   </div>
   
 </section>
 
 <ng-template #sinProductos>
-  <p>No hay productos disponibles.</p>
-</ng-template>
-<!-- Template alternativo si no hay productos -->
-<ng-template #noProducts>
   <p>No hay productos disponibles.</p>
 </ng-template>

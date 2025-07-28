@@ -51,3 +51,6 @@ Acento (Eliminar u opciones críticas): Rojo #e53935
 👤 Autor Mario Alejandro Reyes Medina Desarrollador frontend en formación. Proyecto personal tipo tienda para portafolio, enfocado en buenas prácticas de Angular moderno.
 
 📅 Fecha de inicio Jueves 24 de julio de 2025
+
+comando para inicializar el jason serve
+//json-server --watch db.json --port 3000
