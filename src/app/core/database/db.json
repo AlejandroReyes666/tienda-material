@@ -5,6 +5,7 @@
       "nombre": "Croissant",
       "precio": 3200,
       "categoria": "Panadería",
+      "imageUrl":"https://material.angular.dev/assets/img/examples/shiba2.jpg",
       "descripcion": ""
     },
     {
