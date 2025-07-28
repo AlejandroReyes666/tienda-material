@@ -29,6 +29,6 @@
 
   <div [ngClass]="{'flex justify-end gap-2 mt-4' :true,'dialog-actions':true }" >
     <button mat-button type="button" (click)="cancel()">Cancelar</button>
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ data ? 'Actualizar' : 'Guardar' }}</button>
   </div>
 </form>
