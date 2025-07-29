@@ -14,8 +14,14 @@
   <mat-card-content>
     <p>{{Product.descripcion}}</p>
   </mat-card-content>
-  <mat-card-actions>
-    <button class="btn-info" matButton (click)="actualizarProducto()">Editar</button>
-    <button class="btn-danger " matButton (click)="eliminarProducto()">Eliminar</button>
-  </mat-card-actions>
+ <mat-card-actions>
+<div class="button-group">
+  <button mat-stroked-button color="primary" (click)="actualizarProducto()">
+    <mat-icon>edit</mat-icon> Editar
+  </button>
+  <button mat-stroked-button color="warn" (click)="openDialogEliminar(Product)">
+    <mat-icon>delete</mat-icon> Eliminar
+  </button>
+</div>
+</mat-card-actions>
 </mat-card>

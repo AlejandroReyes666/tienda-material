@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>
+  Eliminar Producto
+</h2>
+<div mat-dialog-content style="margin-bottom: 16px;">
+  ¿Estás seguro que deseas eliminar el producto?
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()" mat-dialog-close>No</button>
+  <button mat-button color="warn" (click)="delete()">Ok</button>
+</div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Producto } from '../models/ProductosModel';
 import { catchError } from 'rxjs';
 import { throwError } from 'rxjs';
@@ -17,12 +17,15 @@ export class ProductoServiceService {
     );
   }
 
-  agregarProductos(nuevoProducto:Producto):Observable<Producto>{
-      return this.http.post<Producto>(this.Appiurl,nuevoProducto).pipe(
-        catchError(this.manejarError)
-      );
-  
-  }
+ agregarProductos(nuevoProducto: Producto): Observable<Producto> {
+  return this.http.post<Producto>(this.Appiurl, nuevoProducto).pipe(
+    map(producto => ({
+      ...producto,
+      id: Number(producto.id) // Convertimos el id a number
+    })),
+    catchError(this.manejarError)
+  );
+}
 
   updateProduct(id: number, producto: Producto): Observable<Producto> {
     return this.http.put<Producto>(`${this.Appiurl}/${id}`, producto).pipe(

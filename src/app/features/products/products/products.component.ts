@@ -6,11 +6,14 @@ import { CommonModule } from '@angular/common';
 import { ProductDialogComponent } from '../../../shared/productDialog/product-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-products',
-  imports: [CommonModule, ProductComponent, ProductDialogComponent],
+  imports: [CommonModule,ProductComponent,ProductDialogComponent,
+    MatButtonModule,MatIconModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
