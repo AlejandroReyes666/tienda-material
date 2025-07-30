@@ -7,11 +7,14 @@ import {merge} from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ContactService } from '../../../core/service/contact.service';
 import { ContactForm } from '../../../core/models/contactModel';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contact',
   standalone:true,
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule,FormsModule],
+  imports: [MatFormFieldModule, MatInputModule, 
+    FormsModule, ReactiveFormsModule,
+    FormsModule,CommonModule],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,7 +36,7 @@ export class ContactComponent {
     message: signal('')
   };
 
-  constructor(private contactService:ContactService) {
+  constructor(private contactService:ContactService,private snackBar: MatSnackBar) {
      Object.entries(this.contact.controls).forEach(([key, control]) => {
       merge(control.statusChanges, control.valueChanges)
         .pipe(takeUntilDestroyed())
@@ -57,6 +60,10 @@ export class ContactComponent {
     return this.contact.controls;
   }
 
+  resetFormulario():void{
+    this.contact.reset();
+  }
+
   enviarFormulario(){
     if(this.contact.valid){
       const formData: ContactForm= {
@@ -68,8 +75,25 @@ export class ContactComponent {
 
 
       this.contactService.guardarPeticionesDeContacto(formData).subscribe({
-        next:()=> alert('Mensaje enviado con Exito'),
-        error:(err)=> alert('Error al enviar el mensaje')
+        next:()=> {
+            this.snackBar.open('Solicitud enviada con exito', 'Cerrar', {
+            duration: 3000,
+            panelClass: ['snackbar-success'],
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          });
+          this.resetFormulario();
+
+        },
+        error:(err)=> {
+          this.snackBar.open(`Error ${err.message} al enviar la solicitud intente mas tarde`, 'Cerrar', {
+            duration: 3000,
+            panelClass: ['snackbar-success'],
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          });
+
+        }
       })
     }
 

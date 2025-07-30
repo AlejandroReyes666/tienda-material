@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-products',
+  standalone:true,
   imports: [CommonModule,ProductComponent,ProductDialogComponent,
     MatButtonModule,MatIconModule],
   templateUrl: './products.component.html',
@@ -53,7 +54,14 @@ openDialog(product?: Producto): void {
       if (product) {
         // Editar
         this.serviceProducto.updateProduct(product.id, result).subscribe({
-          next: () => this.obtenerProductos(),
+          next: () =>{ 
+            this.snackBar.open('Producto Actualizado correctamente', 'Cerrar', {
+              duration: 3000,
+              panelClass: ['snackbar-success'],
+              horizontalPosition: 'right',
+              verticalPosition: 'top'
+            });
+            this.obtenerProductos()},
           error: err => {
             this.snackBar.open(`Error al actualizar: ${err.message}`, 'Cerrar', {
               duration: 5000,
@@ -66,7 +74,15 @@ openDialog(product?: Producto): void {
       } else {
         // Crear
         this.serviceProducto.agregarProductos(result).subscribe({
-          next: () => this.obtenerProductos(),
+          next: () => {
+            this.snackBar.open('Producto creado correctamente', 'Cerrar', {
+              duration: 3000,
+              panelClass: ['snackbar-success'],
+              horizontalPosition: 'right',
+              verticalPosition: 'top'
+            });
+            this.obtenerProductos()
+          },
           error: err => {
             this.snackBar.open(`Error al crear: ${err.message}`, 'Cerrar', {
               duration: 5000,
