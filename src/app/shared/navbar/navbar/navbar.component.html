@@ -1,12 +1,16 @@
+<mat-toolbar color="primary">
+  <span>Tiendas</span>
+  <span class="spacer"></span>
 
-    <mat-toolbar color="primary">
-    <span>Tiendas</span>
-    <span class="spacer"></span>
-    <a mat-button routerLink="/" routerLinkActive="actived" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
-    <a mat-button routerLink="/login" routerLinkActive="actived">Login</a>
-    <a mat-button routerLink="/products" routerLinkActive="actived">Productos</a>
-    <a mat-button routerLink="/aboutus" routerLinkActive="actived">Conócenos</a>
-    <a mat-button routerLink="/contact" routerLinkActive="actived">Contáctanos</a>
-    </mat-toolbar>
+  <a mat-button routerLink="/" routerLinkActive="actived" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
+  <a mat-button routerLink="/login" routerLinkActive="actived">Login</a>
+  <a mat-button routerLink="/products" routerLinkActive="actived">Productos</a>
+  <a mat-button routerLink="/aboutus" routerLinkActive="actived">Conócenos</a>
 
-
+  <!-- Menú de contacto con apariencia homogénea -->
+  <a mat-button [matMenuTriggerFor]="menu" routerLinkActive="actived">Contáctanos</a>
+  <mat-menu #menu="matMenu">
+    <a mat-menu-item routerLink="/contact" routerLinkActive="actived">Atención al cliente</a>
+    <a mat-button routerLink="/workwithus" routerLinkActive="actived">Trabaja con Nosotros</a>
+  </mat-menu>
+</mat-toolbar>
