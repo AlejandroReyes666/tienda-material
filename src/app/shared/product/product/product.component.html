@@ -15,13 +15,13 @@
     <p>{{Product.descripcion}}</p>
   </mat-card-content>
  <mat-card-actions>
-<div class="button-group">
-  <button mat-stroked-button color="primary" (click)="actualizarProducto()">
-    <mat-icon>edit</mat-icon> Editar
-  </button>
-  <button mat-stroked-button color="warn" (click)="openDialogEliminar(Product)">
-    <mat-icon>delete</mat-icon> Eliminar
-  </button>
-</div>
+    <div class="button-group">
+      <button mat-flat-button class="btn-editar" (click)="actualizarProducto()">
+        <mat-icon>edit</mat-icon> Editar
+      </button>
+      <button mat-flat-button class="btn-eliminar" (click)="openDialogEliminar(Product)">
+        <mat-icon>delete</mat-icon> Eliminar
+      </button>
+    </div>
 </mat-card-actions>
 </mat-card>

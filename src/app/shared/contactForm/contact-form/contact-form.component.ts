@@ -68,7 +68,17 @@ export class ContactFormComponent {
 
   submit(): void {
     if (this.form.valid) {
-      const value = { ...this.form.value };
+      const value: ContactForm = {
+        name: this.form.value.name ?? null,
+        email: this.form.value.email ?? null,
+        phone: this.form.value.phone ?? null,
+        message: this.form.value.message ?? null,
+    };
+
+      if (this.isWorkMode()) {
+    value.position = this.form.value.position ?? null;
+    value.linkedin = this.form.value.linkedin ?? null;
+      };
 
       // Limpieza si no es modo 'trabajo'
       if (!this.isWorkMode()) {

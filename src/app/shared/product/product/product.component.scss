@@ -1,3 +1,30 @@
+::ng-deep mat-card-title {
+  font-weight: 600;
+  color: #212121;
+  transition: all 0.3s ease;
+}
+
+::ng-deep mat-card-title:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  background-color: #3F51B5;
+  color: white;
+}
+
+::ng-deep mat-card-subtitle {
+  color: #757575;
+  font-weight: 400;
+  transition: all 0.3s ease;
+}
+
+::ng-deep mat-card-subtitle:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  background-color: #3F51B5;
+  color: white;
+}
+
+
 .producto-card {
   width: 240px;
   border-radius: 12px;
@@ -7,10 +34,11 @@
   background-color: #fff;
 }
 
-.producto-card:hover {
+.producto-card:hover{
   transform: translateY(-4px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  background-color: #cce0ff;
+  background-color: #3F51B5;
+  color: white;
 }
 
 .example-header-image {
@@ -29,14 +57,36 @@ mat-card-actions {
   justify-content: space-between;
   gap: 10px;
   margin-top: 10px;
+  
 }
 
 button {
   flex: 1 1 auto; /* permite que crezca o se encoja */
   min-width: 0;   /* importante para evitar overflow en flex */
   font-weight: bold;
+  background-color: #3F51B5;
+  
 }
 
+.btn-editar {
+  background-color: #3F51B5;
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  mat-icon {
+    margin-right: 4px;
+  }
+}
+
+.btn-eliminar {
+  background-color: #F44336;
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  mat-icon {
+    margin-right: 4px;
+  }
+}
 
 .card-actions {
   display: flex;
@@ -45,6 +95,7 @@ button {
   gap: 8px;
   padding: 8px;
   overflow: visible;
+  color: white;
 }
 
 
@@ -89,6 +140,4 @@ button {
   overflow: hidden;
 }
 
-mat-card.producto-card {
-  padding: 16px;
-}
+

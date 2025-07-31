@@ -6,3 +6,30 @@
   padding: 24px;
   background-color: #f9f9f9;
 }
+
+::ng-deep .btn-agregar {
+  background-color: #3F51B5 !important; // azul principal
+  color: white !important;
+  border-radius: 25px;
+  padding: 8px 20px;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: background-color 0.3s ease;
+  margin-left: 1cm;
+
+  mat-icon {
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  &:hover {
+    background-color: #303F9F !important;
+  }
+}
+
+
+
+
+mat-icon {
+  margin: righ 1cm;
+}

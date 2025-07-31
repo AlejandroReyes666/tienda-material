@@ -3,11 +3,12 @@ import { ContactFormComponent } from '../../shared/contactForm/contact-form/cont
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ContactService } from '../../core/service/contact.service';
 import { ContactForm } from '../../core/models/contactModel';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-work-with-us',
   standalone:true,
-  imports: [ContactFormComponent,],
+  imports: [ContactFormComponent,CommonModule],
   templateUrl: './work-with-us.component.html',
   styleUrl: './work-with-us.component.scss'
 })

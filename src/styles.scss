@@ -5,3 +5,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 ::ng-deep .mat-dialog-container {
   padding: 24px !important;
 }
+
+::ng-deep .mat-raised-button {
+  color: #3F51B5;
+}
+
+* {
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+}

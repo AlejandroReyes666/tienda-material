@@ -17,13 +17,6 @@
         <input matInput formControlName="phone" />
         <mat-error *ngIf="errorMessages.phone()">{{ errorMessages.phone() }}</mat-error>
     </mat-form-field>
-
-    <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Mensaje</mat-label>
-        <textarea matInput formControlName="message"></textarea>
-        <mat-error *ngIf="errorMessages.message()">{{ errorMessages.message() }}</mat-error>
-    </mat-form-field>
-
     <!-- Solo para "trabaja con nosotros" -->
     <ng-container *ngIf="isWorkMode()">
         <mat-form-field appearance="fill" class="full-width">
@@ -36,6 +29,14 @@
         <input matInput formControlName="linkedin" />
         </mat-form-field>
     </ng-container>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Mensaje</mat-label>
+        <textarea matInput formControlName="message"></textarea>
+        <mat-error *ngIf="errorMessages.message()">{{ errorMessages.message() }}</mat-error>
+    </mat-form-field>
+
+    
 
     <button mat-raised-button color="primary" type="submit">Enviar</button>
     </form>
