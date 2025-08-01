@@ -8,17 +8,21 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @Component({
   selector: 'app-products',
   standalone:true,
   imports: [CommonModule,ProductComponent,ProductDialogComponent,
-    MatButtonModule,MatIconModule],
+    MatButtonModule,MatIconModule, MatAutocompleteModule,MatInputModule,MatFormFieldModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
 export class ProductsComponent implements OnInit,OnDestroy{
+  categorias = ['Panadería', 'Pastelería', 'Bebidas', 'Otros'];
 
   productos:Producto[]=[]
   constructor(private serviceProducto:ProductoServiceService,

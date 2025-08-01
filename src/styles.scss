@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 ::ng-deep .mat-dialog-container {
@@ -13,4 +13,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 * {
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
+}
+
+button:disabled,
+button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.mat-dialog-container {
+  font-family: 'Poppins', sans-serif;
 }

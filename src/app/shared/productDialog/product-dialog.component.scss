@@ -18,3 +18,38 @@
   margin-top: 1.5rem;
   flex-wrap: wrap; // para pantallas pequeñas
 }
+
+
+
+.btn-efectuarcambio {
+  background-color: #3F51B5;
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+ 
+}
+
+
+
+.btn-cancelar {
+  background-color: #E57373;
+  color: white;
+  border-radius: 8px;
+  font-weight: 500; 
+}
+
+.btn-efectuarcambio:disabled {
+  background-color: #ccc !important;
+  color: #666 !important;
+  cursor: not-allowed;
+  box-shadow: none !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline {
+  color: #3F51B5; // Para navegadores que respeten color
+  stroke: #3F51B5; // Para SVG (Angular Material usa SVG para el borde)
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  stroke: #3F51B5;
+}
