@@ -11,20 +11,29 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormControl,ReactiveFormsModule } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @Component({
   selector: 'app-products',
   standalone:true,
   imports: [CommonModule,ProductComponent,ProductDialogComponent,
-    MatButtonModule,MatIconModule, MatAutocompleteModule,MatInputModule,MatFormFieldModule],
+    MatButtonModule,MatIconModule, MatAutocompleteModule,
+    MatInputModule,MatFormFieldModule,ReactiveFormsModule,MatSelectModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
 export class ProductsComponent implements OnInit,OnDestroy{
-  categorias = ['Panadería', 'Pastelería', 'Bebidas', 'Otros'];
+  categorias :string[]=[];
+  productos:Producto[]=[];
+  categoriaSeleccionada = '';
 
-  productos:Producto[]=[]
+  myControl = new FormControl('');
+  filteredOptions!: Observable<string[]>;
+
   constructor(private serviceProducto:ProductoServiceService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
@@ -34,6 +43,40 @@ obtenerProductos() {
   this.serviceProducto.getProductos().subscribe({
     next: producto => {
       this.productos = producto;
+    },
+    error: err => {
+      this.snackBar.open(err.message, 'Cerrar', {
+        duration: 5000,
+        panelClass: ['snackbar-error'],
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
+      });
+    }
+  });
+}
+
+
+obtenerCategorias(){
+  this.serviceProducto.getProductos().subscribe({
+    next: productos => {
+      this.categorias = [...new Set(productos.map(p => p.categoria))];
+      this.initAutocomplete();
+    },
+    error: err => {
+      this.snackBar.open(err.message, 'Cerrar', {
+        duration: 5000,
+        panelClass: ['snackbar-error'],
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
+      });
+    }
+  });
+}
+
+obtenerProductosPorCategoria() {
+  this.serviceProducto.getProductos().subscribe({
+    next: productos => {
+      this.productos = productos.filter(p => p.categoria === this.categoriaSeleccionada);
     },
     error: err => {
       this.snackBar.open(err.message, 'Cerrar', {
@@ -102,8 +145,6 @@ openDialog(product?: Producto): void {
 }
 
 
-
-
 eliminarProducto(id: number): void {
   this.serviceProducto.deleteProduct(id).subscribe({
     next: () => {
@@ -127,8 +168,34 @@ eliminarProducto(id: number): void {
 }
 
 
+initAutocomplete(){
+  this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || ''))
+    );
+}
+
+
+private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.categorias.filter(option =>
+      option.toLowerCase().includes(filterValue)
+    );
+  }
+
+  abrirAutocomplete() {
+    const value = this.myControl.value;
+    this.myControl.setValue(value ?? '');
+  }
+
+  resetform(){
+    this.myControl.reset();
+  }
+
   ngOnInit(): void {
     this.obtenerProductos();
+    this.obtenerCategorias();
+  
   }
 
   ngOnDestroy(): void {
