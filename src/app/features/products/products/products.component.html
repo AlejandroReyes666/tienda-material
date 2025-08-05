@@ -1,12 +1,10 @@
 
-
-
 <!-- productos.component.html -->
- <div class="flex justify-end mb-4">
+ <div class="filtro-contenedor">
   <br>
   <div>
     <form class="example-form">
-      <mat-form-field appearance="fill" class="w-100">
+      <mat-form-field appearance="fill" class="filtro-categorias">
        <mat-label>Elige una categoría</mat-label>
          <mat-select [(value)]="categoriaSeleccionada" (selectionChange)="obtenerProductosPorCategoria()">
             <mat-option [value]="''">Todas las categorías</mat-option>
@@ -15,14 +13,16 @@
             </mat-option>
           </mat-select>
      </mat-form-field>
-      <button mat-raised-button color="primary" (click)="resetform()">Enviar</button>
     </form>
   </div>
-  
-  <button class="btn-agregar" mat-raised-button  (click)="openDialog()" fontIcon="home">
-    <mat-icon>add</mat-icon>
-    Agregar Producto
-  </button>
+
+  <div class="boton-agregar-container">
+    <button class="btn-agregar" mat-raised-button  (click)="openDialog()" fontIcon="home">
+      <mat-icon>add</mat-icon>
+      Agregar Producto
+    </button>
+  </div>
+
 </div>
 
 <section *ngIf="productos.length > 0; else sinProductos">
@@ -31,8 +31,9 @@
         <app-product [Product]="producto" (eliminar)="eliminarProducto($event)" (editar)="openDialog(producto)"></app-product>    
     </div>
   </div>
-  
 </section>
+
+
 
 
 

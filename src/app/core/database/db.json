@@ -101,5 +101,26 @@
       "position": "faffdsasdfd",
       "linkedin": ""
     }
+  ],
+
+  "beneficios": [
+    {
+      "id": 1,
+      "icono": "local_shipping",
+      "titulo": "Envíos rápidos",
+      "descripcion": "Entregas garantizadas en 24 a 48 horas a nivel nacional."
+    },
+    {
+      "id": 2,
+      "icono": "star_rate",
+      "titulo": "Calidad artesanal",
+      "descripcion": "Pan hecho a mano con masa madre 100% natural y fermentación lenta."
+    },
+    {
+      "id": 3,
+      "icono": "support_agent",
+      "titulo": "Soporte personalizado",
+      "descripcion": "Atención directa para resolver tus dudas y personalizar tus pedidos."
+    }
   ]
 }

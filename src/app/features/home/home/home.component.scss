@@ -1,0 +1,18 @@
+::ng-deep mat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  background-color: #3F51B5;
+  color: white;
+  mat-card-title{
+    color: white;
+  }
+}
+
+::ng-deep mat-card-title {
+  font-weight: 600;
+  color: #212121;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
+}

@@ -2,6 +2,9 @@
   font-weight: 600;
   color: #212121;
   transition: all 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
 }
 
 ::ng-deep mat-card-title:hover {
@@ -141,3 +144,16 @@ button {
 }
 
 
+mat-card img {
+  border-radius: 8px;
+}
+
+
+
+
+.producto-card h2,
+.producto-card p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

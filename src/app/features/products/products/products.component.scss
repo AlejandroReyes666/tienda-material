@@ -38,11 +38,40 @@
   }
 }
 
+.boton-agregar-container {
+  display: flex;
+  justify-content: center;
+}
 
+.filtro-contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
 
+.filtro-categorias {
+  min-width: 250px;
+  color: #303F9F;
+}
 
 mat-icon {
   margin: righ 1cm;
+}
+
+::ng-deep mat-option:hover {
+  background-color: #303F9F!important;
+  color: white !important;
+}
+
+::ng-deep mat-label{
+  color: #303F9F;
+}
+
+::ng-deep mat-form{
+  border-color: #303F9F;
 }
 
 

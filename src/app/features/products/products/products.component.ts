@@ -29,6 +29,8 @@ import { MatSelectModule } from '@angular/material/select';
 export class ProductsComponent implements OnInit,OnDestroy{
   categorias :string[]=[];
   productos:Producto[]=[];
+  productosfiltrados:Producto[]=[];
+  todosLosProductos: Producto[] = [];
   categoriaSeleccionada = '';
 
   myControl = new FormControl('');
@@ -42,6 +44,7 @@ export class ProductsComponent implements OnInit,OnDestroy{
 obtenerProductos() {
   this.serviceProducto.getProductos().subscribe({
     next: producto => {
+      this.todosLosProductos = producto;
       this.productos = producto;
     },
     error: err => {
@@ -74,19 +77,14 @@ obtenerCategorias(){
 }
 
 obtenerProductosPorCategoria() {
-  this.serviceProducto.getProductos().subscribe({
-    next: productos => {
-      this.productos = productos.filter(p => p.categoria === this.categoriaSeleccionada);
-    },
-    error: err => {
-      this.snackBar.open(err.message, 'Cerrar', {
-        duration: 5000,
-        panelClass: ['snackbar-error'],
-        horizontalPosition: 'right',
-        verticalPosition: 'top'
-      });
-    }
-  });
+  if (this.categoriaSeleccionada === ''|| !this.categoriaSeleccionada) {
+    this.productos = this.todosLosProductos;
+    return;
+  }
+
+  this.productos = this.todosLosProductos.filter(product =>
+    product.categoria?.toLowerCase().includes(this.categoriaSeleccionada.toLowerCase())
+  );
 }
 
 
