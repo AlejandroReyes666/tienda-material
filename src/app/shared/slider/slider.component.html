@@ -1,0 +1,25 @@
+<div class="carousel-container">
+    <button class="custom-prev" (click)="slickModal.slickPrev()">
+        <mat-icon>chevron_left</mat-icon>
+    </button>
+
+  <ngx-slick-carousel
+    #slickModal
+    *ngIf="bannerSlides.length > 0"
+    class="carousel"
+    [config]="slideConfig"
+  >
+    <div ngxSlickItem *ngFor="let banner of bannerSlides" class="slide">
+      <div class="slide-background" [ngStyle]="{'background-image': 'url(' + banner.img + ')'}">
+        <div class="slide-text">
+          <h2>{{ banner.title }}</h2>
+          <p>{{ banner.text }}</p>
+        </div>
+      </div>
+    </div>
+  </ngx-slick-carousel>
+
+    <button class="custom-next" (click)="slickModal.slickNext()">
+        <mat-icon>chevron_right</mat-icon>
+    </button>
+</div>

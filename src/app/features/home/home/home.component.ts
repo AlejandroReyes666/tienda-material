@@ -6,17 +6,21 @@ import { FlexLayoutModule } from '@ngbracket/ngx-layout';
 import { Servicios } from '../../../core/models/ServiciosModel';
 import { ServiciosService } from '../../../core/service/servicios.service';
 import { CommonModule } from '@angular/common';
+import { SliderComponent } from '../../../shared/slider/slider.component';
+
 @Component({
+
   selector: 'app-home',
   standalone:true,
   imports: [MatCardModule,MatIconModule,LayoutModule,
-    FlexLayoutModule,CommonModule],
+    FlexLayoutModule,CommonModule,SliderComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
    servicios: Servicios[] = [];
 
+  
   constructor(private serviciosService:ServiciosService){
   }
 
