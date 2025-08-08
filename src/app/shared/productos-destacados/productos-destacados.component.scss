@@ -1,0 +1,36 @@
+.carousel {
+  margin: 20px auto;
+}
+
+.card {
+  width: 300px;
+  margin: auto;
+}
+
+.card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+ 
+}
+
+button {
+  justify-content: center;
+   background-color: #3F51B5;
+}
+
+.btn-mas{
+  justify-content: center;
+   background-color: #3F51B5;
+}
+
+.btn-mas:hover{
+  justify-content: center;
+   background-color:  #161c44;
+}

@@ -49,4 +49,10 @@ export class ProductoServiceService {
   // Mensaje amigable
   return throwError(() => new Error('🚨 Ocurrió un error. Por favor, intenta más tarde.'));
 }
+
+getProductosDestacados(): Observable<Producto[]> {
+  return this.http.get<Producto[]>(this.Appiurl).pipe(
+    map(productos => productos.filter(p => p.destacado === true))
+  );
+}
 }

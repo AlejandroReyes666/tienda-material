@@ -5,4 +5,5 @@ export interface Producto {
   categoria: string;
   descripcion:string;
   imageUrl:string
+  destacado?: boolean;
 }

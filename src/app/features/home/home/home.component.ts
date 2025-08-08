@@ -7,13 +7,15 @@ import { Servicios } from '../../../core/models/ServiciosModel';
 import { ServiciosService } from '../../../core/service/servicios.service';
 import { CommonModule } from '@angular/common';
 import { SliderComponent } from '../../../shared/slider/slider.component';
+import { ProductosDestacadosComponent } from '../../../shared/productos-destacados/productos-destacados.component';
+import { Router } from '@angular/router';
 
 @Component({
 
   selector: 'app-home',
   standalone:true,
   imports: [MatCardModule,MatIconModule,LayoutModule,
-    FlexLayoutModule,CommonModule,SliderComponent],
+    FlexLayoutModule,CommonModule,SliderComponent,ProductosDestacadosComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -21,8 +23,14 @@ export class HomeComponent implements OnInit {
    servicios: Servicios[] = [];
 
   
-  constructor(private serviciosService:ServiciosService){
+  constructor(private serviciosService:ServiciosService,
+    private router:Router
+  ){
   }
+
+  verMas(){
+  this.router.navigate(['/products']);
+}
 
   ngOnInit(): void {
 
