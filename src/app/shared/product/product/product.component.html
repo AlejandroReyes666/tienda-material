@@ -13,6 +13,8 @@
 
   <mat-card-content>
     <p>{{Product.descripcion}}</p>
+    <br>
+    <p class="precio">Precio: {{Product.enOferta?  Product.precioOferta : Product.precio}}</p>
   </mat-card-content>
  <mat-card-actions>
     <div class="button">

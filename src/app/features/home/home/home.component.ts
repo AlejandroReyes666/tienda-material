@@ -32,6 +32,10 @@ export class HomeComponent implements OnInit {
   this.router.navigate(['/products']);
 }
 
+verOfertas(){
+  this.router.navigate(['/sales']);
+}
+
   ngOnInit(): void {
 
     this.serviciosService.getBeneficios().subscribe(data => {

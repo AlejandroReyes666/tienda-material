@@ -55,4 +55,10 @@ getProductosDestacados(): Observable<Producto[]> {
     map(productos => productos.filter(p => p.destacado === true))
   );
 }
+
+getProductosEnOferta(): Observable<Producto[]> {
+  return this.http.get<Producto[]>(this.Appiurl).pipe(
+    map(productos => productos.filter(p => p.enOferta === true))
+  );
+  }
 }
