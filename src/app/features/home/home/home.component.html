@@ -1,7 +1,7 @@
 <app-slider></app-slider>
 <section  class="servicios-section">
   <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="2rem">
-    <mat-card *ngFor="let servicio of servicios" style="width: 280px;">
+    <mat-card *ngFor="let servicio of servicios" style="width: 280px;" @fadeIn>
       <mat-card-header>
         <mat-icon>{{ servicio.icono }}</mat-icon>
         <br>
@@ -19,7 +19,7 @@
     <mat-icon>shopping_cart</mat-icon> Haz tu pedido ahora
   </button>
 
-  <button mat-stroked-button color="primary"  class="sales-buttom" (click)="verOfertas()"> >
+  <button mat-stroked-button color="primary"  class="sales-buttom" (click)="verOfertas()"> 
     <mat-icon>local_offer</mat-icon> Nuestras ofertas
   </button>
 </div>

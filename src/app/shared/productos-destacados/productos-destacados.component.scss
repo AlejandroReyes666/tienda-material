@@ -35,21 +35,3 @@ button {
    background-color:  #161c44;
 }
 
- mat-card-title {
-  font-size: 1rem; /* ajusta según necesidad */
-  font-weight: bold;
-  text-align: center;
-  margin: 0.5rem 0;
-  white-space: nowrap; /* evita salto de línea */
-  overflow: hidden;
-  text-overflow: ellipsis; /* puntos suspensivos */
-}
-
-mat-card-title.multiline {
-  white-space: normal; /* permite varias líneas */
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* máximo de líneas */
-  line-clamp: 2; /* estándar para compatibilidad */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}

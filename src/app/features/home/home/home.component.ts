@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { SliderComponent } from '../../../shared/slider/slider.component';
 import { ProductosDestacadosComponent } from '../../../shared/productos-destacados/productos-destacados.component';
 import { Router } from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
 
@@ -17,7 +18,15 @@ import { Router } from '@angular/router';
   imports: [MatCardModule,MatIconModule,LayoutModule,
     FlexLayoutModule,CommonModule,SliderComponent,ProductosDestacadosComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
+      ]),
+    ]),
+  ],
 })
 export class HomeComponent implements OnInit {
    servicios: Servicios[] = [];

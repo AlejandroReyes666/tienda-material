@@ -40,3 +40,28 @@ body {
 }
 
 
+
+mat-card-title.multiline {
+ font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 0.5rem 0;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* máximo 2 líneas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 3rem; /* fuerza altura fija para alinear */
+  overflow: hidden;
+}
+
+.producto-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 350px; /* ajusta según tu diseño */
+}
+
+mat-card-content p {
+  min-height: 20px; /* evita que descripciones cortas deformen la card */
+}
