@@ -1,1 +1,46 @@
-<p>login works!</p>
+<div class="login-container">
+  <mat-card class="login-card">
+    <div class="login-header">
+      <mat-icon class="login-icon">account_circle</mat-icon>
+    </div>
+
+    <mat-card-title class="login-title">
+      {{ isLoginMode ? 'Iniciar sesión' : 'Registrarse' }}
+    </mat-card-title>
+
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <!-- Campo solo visible en registro -->
+        <mat-form-field *ngIf="!isLoginMode" appearance="fill" class="full-width">
+          <mat-label>Nombre de usuario</mat-label>
+          <mat-icon matPrefix>person</mat-icon>
+          <input matInput formControlName="username">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Email</mat-label>
+          <mat-icon matPrefix>mail_outline</mat-icon>
+          <input matInput type="email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-icon matPrefix>lock_outline</mat-icon>
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" formControlName="password">
+        </mat-form-field>
+
+        <button mat-raised-button class="login-button" [disabled]="loginForm.invalid">
+          {{ isLoginMode ? 'Iniciar sesión' : 'Registrarse' }}
+        </button>
+      </form>
+
+      <p class="register-link">
+        {{ isLoginMode ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?' }}
+        <a (click)="toggleMode()">
+          {{ isLoginMode ? 'Regístrate aquí' : 'Inicia sesión aquí' }}
+        </a>
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
