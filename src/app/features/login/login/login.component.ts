@@ -9,6 +9,9 @@ import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { userForm } from '../../../core/models/userModel';
 import { FormControl, Validators } from '@angular/forms';
+import { UsersService } from '../../../core/service/users.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -18,6 +21,7 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
+  isLoading = false; // para mostrar un spinner si es necesario
 
   isLoginMode = true; // modo actual (true=login, false=registro)
 
@@ -27,6 +31,12 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required),
     rol: new FormControl('cliente') // por defecto cliente
   });
+
+  constructor( 
+    private usersService: UsersService ,// inyectar el servicio de usuarios
+    private snakbar: MatSnackBar, // inyectar el servicio de snackbar para notificaciones
+    private router: Router,
+  ) { }
 
   toggleMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -39,16 +49,85 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.isLoginMode) {
-      console.log('🔑 Login con:', this.loginForm.value);
-      // mañana implementamos login
-    } else {
-      console.log('🆕 Registro con:', this.loginForm.value);
-      // mañana implementamos registro con rol
+    console.log('Form submitted:' + JSON.stringify(this.loginForm.value));
+
+    this.isLoading = true; // iniciar el loading
+
+    const userData: userForm = this.loginForm.value as userForm;
+
+    if (this.loginForm.invalid) {
+      this.snakbar.open('Por favor, completa todos los campos requeridos.', 'Cerrar', {
+        duration: 3000,
+        panelClass: ['error-snackbar']
+      });
+      return;
     }
+
+    this.isLoading = true;
+
+    this.isLoginMode ? this.login(userData) : this.register(userData);
   }
+    
+
+  login(userData: userForm) {
+    console.log('Login method called');
+    
+    this.usersService.login(userData.email ?? '', userData.password ?? '').subscribe(
+      response => {
+        this.isLoading = false; // detener el loading
+        if (response) {
+          
+          this.snakbar.open('Inicio de sesión exitoso', 'Cerrar', {
+            duration: 3000,
+            panelClass: ['success-snackbar'],
+          });
+          this.router.navigate(['/products']);
+        } else {
+          this.snakbar.open('Credenciales inválidas', 'Cerrar', {
+            duration: 3000,
+            panelClass: ['error-snackbar']
+          });
+        }
+      },
+      
+      error => {
+        this.isLoading = false;
+        console.error('Error al iniciar sesión:', error);
+         // detener el loading
+         // mostrar mensaje de error
+        this.snakbar.open('Error al iniciar sesión', 'Cerrar', {
+          duration: 3000,
+          panelClass: ['error-snackbar']
+        });
+      }
+    );
+  }
+
+  register(userData: userForm) {
+    console.log('Register method called');
+    this.usersService.register(userData).subscribe(
+      response => {
+        this.isLoading = false; // detener el loading
+        console.log('Usuario registrado:', response);
+        this.snakbar.open('Registro exitoso', 'Cerrar', {
+          duration: 3000,
+          panelClass: ['success-snackbar'],
+        });
+        this.isLoginMode = true; // cambiar a modo login
+      },
+      error => {
+        this.isLoading = false; // detener el loading
+        console.error('Error al registrar usuario:', error);
+        this.snakbar.open('Error al registrar usuario', 'Cerrar', {
+          duration: 3000,
+          panelClass: ['error-snackbar']
+        });
+      }
+    );
+  }
+
+
   ngOnInit(): void {
-    // Inicializar el formulario si es necesario
-    this.loginForm.reset();
+
   }
 }

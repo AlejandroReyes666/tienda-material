@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
   }
 
   verMas(){
-  this.router.navigate(['/products']);
+  this.router.navigate(['/login']);
 }
 
 verOfertas(){

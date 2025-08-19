@@ -1,10 +1,14 @@
-.carousel {
-  margin: 20px auto;
-}
-
 .card {
   width: 300px;
   margin: auto;
+  height: 100%;
+  display: flex;
+}
+
+.producto-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .card img {
@@ -12,26 +16,24 @@
   object-fit: cover;
 }
 
-.button-group {
+mat-card-content {
+  flex-grow: 1; /* el contenido ocupa el espacio disponible */
+}
+
+mat-card-actions {
   display: flex;
-  justify-content: center;
-  margin-top: 10px;
-  width: 100%;
- 
+  justify-content: center; /* centra el botón */
+  margin-top: auto; /* empuja el botón al fondo */
 }
 
-button {
-  justify-content: center;
-   background-color: #3F51B5;
+.btn-mas {
+  background-color: #3F51B5;
+  color: white;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 6px;
 }
 
-.btn-mas{
-  justify-content: center;
-   background-color: #3F51B5;
+.btn-mas:hover {
+  background-color: #161c44;
 }
-
-.btn-mas:hover{
-  justify-content: center;
-   background-color:  #161c44;
-}
-
