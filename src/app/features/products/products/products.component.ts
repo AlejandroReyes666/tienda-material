@@ -15,14 +15,17 @@ import { FormControl,ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { MatSelectModule } from '@angular/material/select';
+import { AuthService } from '../../../core/service/auth.service';
+import{RouterModule} from '@angular/router';
+import { routes } from '../../../app.routes';
 
 
 @Component({
   selector: 'app-products',
   standalone:true,
-  imports: [CommonModule,ProductComponent,ProductDialogComponent,
-    MatButtonModule,MatIconModule, MatAutocompleteModule,
-    MatInputModule,MatFormFieldModule,ReactiveFormsModule,MatSelectModule],
+  imports: [CommonModule, ProductComponent, ProductDialogComponent,
+    MatButtonModule, MatIconModule, MatAutocompleteModule,
+    MatInputModule, MatFormFieldModule, ReactiveFormsModule, MatSelectModule,RouterModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -38,7 +41,8 @@ export class ProductsComponent implements OnInit,OnDestroy{
 
   constructor(private serviceProducto:ProductoServiceService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authService: AuthService
   ){}
 
 obtenerProductos() {
@@ -190,11 +194,17 @@ private _filter(value: string): string[] {
     this.myControl.reset();
   }
 
+  isloggedIn(): boolean {
+    return this.authService.IsLoggedIn;
+  }
+
   ngOnInit(): void {
     this.obtenerProductos();
     this.obtenerCategorias();
   
   }
+
+
 
   ngOnDestroy(): void {
     

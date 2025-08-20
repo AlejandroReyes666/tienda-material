@@ -6,11 +6,12 @@ import { ContactComponent } from './features/contact/contact/contact.component';
 import { AboutUsComponent } from './features/aboutUs/about-us/about-us.component';
 import { WorkWithUsComponent } from './features/work-with-us/work-with-us.component';
 import { SalesComponent } from './features/sales/sales.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'products', component: ProductsComponent },
+    { path: 'products', component: ProductsComponent,canActivate: [AuthGuard] },
     { path: 'contact', component: ContactComponent },
     { path: 'workwithus', component: WorkWithUsComponent },
     {path:'aboutus', component:AboutUsComponent},

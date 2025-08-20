@@ -18,10 +18,10 @@
   </mat-card-content>
  <mat-card-actions>
     <div class="button">
-      <button mat-flat-button class="btn-editar" (click)="actualizarProducto()">
+      <button *ngIf="isAdmin" mat-flat-button class="btn-editar" (click)="actualizarProducto()">
         <mat-icon>edit</mat-icon> Editar
       </button>
-      <button mat-flat-button class="btn-eliminar" (click)="openDialogEliminar(Product)">
+      <button *ngIf="isAdmin" mat-flat-button class="btn-eliminar" (click)="openDialogEliminar(Product)">
         <mat-icon>delete</mat-icon> Eliminar
       </button>
     </div>

@@ -12,6 +12,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { UsersService } from '../../../core/service/users.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../core/service/auth.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit {
     private usersService: UsersService ,// inyectar el servicio de usuarios
     private snakbar: MatSnackBar, // inyectar el servicio de snackbar para notificaciones
     private router: Router,
+    private authService: AuthService
   ) { }
 
   toggleMode() {
@@ -76,6 +78,8 @@ export class LoginComponent implements OnInit {
       response => {
         this.isLoading = false; // detener el loading
         if (response) {
+
+          this.authService.loggedSuccess(response[0].rol);
           
           this.snakbar.open('Inicio de sesión exitoso', 'Cerrar', {
             duration: 3000,

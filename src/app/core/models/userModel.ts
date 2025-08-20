@@ -4,4 +4,5 @@ export interface userForm {
     phone: string | null;
     password: string | null;
     rol: string | null;
+    token?: string | null;
 }

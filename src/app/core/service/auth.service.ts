@@ -1,0 +1,40 @@
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+
+  constructor() { }
+  private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
+  private role = new BehaviorSubject<string|null>(localStorage.getItem('role'));
+
+  isLoggedIn$ = this.loggedIn.asObservable();
+  role$ = this.role.asObservable();
+
+  private hasToken(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  loggedSuccess(rol: string | null = null) {
+    this.loggedIn.next(true);
+    this.role.next(rol);
+  }
+
+  loggedOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('user');
+    this.loggedIn.next(false);
+    this.role.next(null);
+  }
+
+  get CurrentRole(): string | null {
+    return this.role.value;
+  }
+
+  get IsLoggedIn(): boolean {
+    return this.loggedIn.value;
+  }
+}

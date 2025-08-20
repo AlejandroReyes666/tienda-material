@@ -1,6 +1,6 @@
 
 <!-- productos.component.html -->
- <div class="filtro-contenedor">
+ <div class="filtro-contenedor" *ngIf="isloggedIn()" else routerLink="login" routerLinkActive="actived" >
   <br>
   <div>
     <form class="example-form">
@@ -32,11 +32,6 @@
     </div>
   </div>
 </section>
-
-
-
-
-
 
 
 <ng-template #sinProductos>
