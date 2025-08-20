@@ -17,24 +17,30 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-  loggedSuccess(rol: string | null = null) {
-    this.loggedIn.next(true);
-    this.role.next(rol);
+loggedSuccess(rol: string | null = null, token: string | null) {
+  if (!token) return; // por seguridad, no guardamos si viene vacío
+  localStorage.setItem('token', token);
+
+  if (rol) {
+    localStorage.setItem('role', rol);
   }
+  this.loggedIn.next(true);
+  this.role.next(rol);
+}
 
   loggedOut() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    localStorage.removeItem('user');
-    this.loggedIn.next(false);
-    this.role.next(null);
-  }
+  localStorage.removeItem('token');
+  localStorage.removeItem('role');
+  localStorage.removeItem('user');
+  this.loggedIn.next(false);
+  this.role.next(null);
+}
 
   get CurrentRole(): string | null {
     return this.role.value;
   }
 
   get IsLoggedIn(): boolean {
-    return this.loggedIn.value;
+    return !!localStorage.getItem('token');
   }
 }

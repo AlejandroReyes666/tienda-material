@@ -13,6 +13,7 @@ import { UsersService } from '../../../core/service/users.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/service/auth.service';
+import{LoginResponse} from '../../../core/models/LoginResponse'
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   isLoginMode = true; // modo actual (true=login, false=registro)
 
-  loginForm = new FormGroup({
+  loginForm = new FormGroup({ 
     username: new FormControl(''), // requerido solo en registro
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
@@ -75,11 +76,11 @@ export class LoginComponent implements OnInit {
     console.log('Login method called');
     
     this.usersService.login(userData.email ?? '', userData.password ?? '').subscribe(
-      response => {
+      (response) => {
         this.isLoading = false; // detener el loading
         if (response) {
 
-          this.authService.loggedSuccess(response[0].rol);
+          this.authService.loggedSuccess(response[0].rol, response[0].token??'');
           
           this.snakbar.open('Inicio de sesión exitoso', 'Cerrar', {
             duration: 3000,
