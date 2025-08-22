@@ -4,13 +4,16 @@ import { Observable, of } from 'rxjs';
 import { userForm } from '../models/userModel';
 import { map, catchError } from 'rxjs/operators';
 import { LoginResponse } from '../models/LoginResponse';
+import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
   private apiUrl = 'http://localhost:3000/usuarios';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,
+              private authService: AuthService
+  ) { }
 
   login(email:string, password:string): Observable<userForm[] | null> {
     console.log('Attempting to login with:', { email, password });
@@ -21,9 +24,10 @@ export class UsersService {
           if(users.length > 0 && users[0].password === password){
             
             const token = btoa(`${user.email}:${user.password}`);
-            localStorage.setItem('token', token);
+            //localStorage.setItem('token', token);
+            this.authService.loggedSuccess(user.rol, token);
             console.log("el token es: ", token);
-            localStorage.setItem('role', user.rol ?? '');
+            
             localStorage.setItem('user', JSON.stringify(user));
             return [user];
           } else {
