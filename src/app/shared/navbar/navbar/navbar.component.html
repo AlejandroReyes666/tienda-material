@@ -3,14 +3,29 @@
   <span class="spacer"></span>
 
   <a mat-button routerLink="/" routerLinkActive="actived" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
-  <a mat-button routerLink="/login" routerLinkActive="actived">Login</a>
   <a mat-button routerLink="/products" routerLinkActive="actived">Productos</a>
   <a mat-button routerLink="/aboutus" routerLinkActive="actived">Conócenos</a>
 
-  <!-- Menú de contacto con apariencia homogénea -->
+  <!-- Contacto -->
   <a mat-button [matMenuTriggerFor]="menu" routerLinkActive="actived">Contáctanos</a>
   <mat-menu #menu="matMenu">
     <a mat-menu-item routerLink="/contact" routerLinkActive="actived">Atención al cliente</a>
     <a mat-menu-item routerLink="/workwithus" routerLinkActive="actived">Trabaja con Nosotros</a>
   </mat-menu>
+
+  <!-- 👇 Aquí la parte dinámica -->
+  <ng-container   *ngIf="isLoggedIn; else showLogin">
+    <!-- Si está logueado -->
+    <button mat-button [matMenuTriggerFor]="userMenu">
+      {{ currentRole || 'Usuario' }}
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item (click)="handleAuthAction()">Cerrar sesión</button>
+    </mat-menu>
+  </ng-container>
+
+  <!-- Si no está logueado -->
+  <ng-template #showLogin>
+    <a mat-button routerLink="/login" routerLinkActive="actived">Login</a>
+  </ng-template>
 </mat-toolbar>

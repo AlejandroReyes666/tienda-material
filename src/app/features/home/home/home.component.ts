@@ -10,6 +10,7 @@ import { SliderComponent } from '../../../shared/slider/slider.component';
 import { ProductosDestacadosComponent } from '../../../shared/productos-destacados/productos-destacados.component';
 import { Router } from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { AuthService } from '../../../core/service/auth.service';
 
 @Component({
 
@@ -33,12 +34,17 @@ export class HomeComponent implements OnInit {
 
   
   constructor(private serviciosService:ServiciosService,
-    private router:Router
+    private router:Router,
+    private authService: AuthService
   ){
   }
 
   verMas(){
-  this.router.navigate(['/login']);
+    if (this.authService.IsLoggedIn) {
+      this.router.navigate(['/products']);
+    } else {
+      this.router.navigate(['/login']);
+    }
 }
 
 verOfertas(){

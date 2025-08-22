@@ -34,6 +34,7 @@ loggedSuccess(rol: string | null = null, token: string | null) {
   localStorage.removeItem('user');
   this.loggedIn.next(false);
   this.role.next(null);
+  console.log('Logged out successfully');
 }
 
   get CurrentRole(): string | null {
