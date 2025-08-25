@@ -1,0 +1,35 @@
+.description-cards {
+  background: #f8f9fa; /* gris muy claro */
+  padding: 3rem 2rem;
+  margin: 2rem auto;
+  max-width: 1200px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border-radius: 16px;
+}
+
+mat-card  {
+  margin-bottom: 8px;
+}
+
+mat-icon{
+    font-size: 20px;
+    color: #3f51b5; /* color primario Angular Material */
+    margin-right: 8px;
+    padding: 4px;
+}
+.description-cards div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+
+mat-card {
+  width: 280px;
+  flex: 0 1 auto; /* permite que se acomoden */
+}
+mat-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+}
