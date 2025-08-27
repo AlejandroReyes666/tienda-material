@@ -7,11 +7,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { merge } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContactForm } from '../../../core/models/contactModel';
+import { MatCardModule } from '@angular/material/card';
+import { QuillModule } from 'ngx-quill';
 
 @Component({
   selector: 'app-contact-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, 
+    MatCardModule,QuillModule],
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -94,5 +97,10 @@ export class ContactFormComponent {
         control.updateValueAndValidity();
       });
     }
+  }
+
+   getErrorMessage(controlName: string): string {
+    const control = this.form.get(controlName);
+    return control?.hasError('required') ? 'Este campo es obligatorio' : '';
   }
 }
