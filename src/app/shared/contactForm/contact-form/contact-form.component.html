@@ -35,15 +35,18 @@
             </mat-form-field>
         </ng-container>
 
-        <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Mensaje</mat-label>
-            <textarea matInput formControlName="message"
-                rows="5" 
-                cdkTextareaAutosize
-                cdkAutosizeMinRows="3"
-                cdkAutosizeMaxRows="6">></textarea>
-            <mat-error *ngIf="errorMessages.message()">{{ errorMessages.message() }}</mat-error>
-        </mat-form-field>
+        <div class="quill-container" [ngClass]="{'mat-focused': form.get('message')?.touched,'mat-error': form.get('message')?.invalid && form.get('message')?.touched}">
+            <quill-editor
+                formControlName="message"
+                aria-label="Editor de mensaje"
+                [modules]="{ toolbar: [['bold','italic','arial','underline'], [{ 'list': 'ordered' }, { 'list': 'bullet' }], 
+                ['link'],[{ 'color': ['black', 'gray', 'blue', 'green', 'red', 'orange', 'purple'] }]] }"
+                [styles]="{ height: '200px' }"
+                placeholder="Escribe tu mensaje..."
+            ></quill-editor>
+        </div>
+
+       
 
         <div class="button-container">
             <button mat-raised-button class="enviar" color="primary" type="submit">Enviar</button>
