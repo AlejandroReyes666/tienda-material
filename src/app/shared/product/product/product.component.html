@@ -18,6 +18,9 @@
   </mat-card-content>
  <mat-card-actions>
     <div class="button">
+      <button mat-flat-button color="primary" (click)="addToCart(Product)">
+        <mat-icon>add_shopping_cart</mat-icon> Añadir al carrito
+      </button>
       <button *ngIf="isAdmin" mat-flat-button class="btn-editar" (click)="actualizarProducto()">
         <mat-icon>edit</mat-icon> Editar
       </button>

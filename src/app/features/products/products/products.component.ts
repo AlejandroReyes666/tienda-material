@@ -18,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { AuthService } from '../../../core/service/auth.service';
 import{RouterModule} from '@angular/router';
 import { routes } from '../../../app.routes';
+import { CartService } from '../../../core/service/cart.service';
 
 
 @Component({
@@ -42,7 +43,8 @@ export class ProductsComponent implements OnInit,OnDestroy{
   constructor(private serviceProducto:ProductoServiceService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private authService: AuthService
+    private authService: AuthService,
+    private cartService: CartService
   ){}
 
 obtenerProductos() {
@@ -197,6 +199,19 @@ private _filter(value: string): string[] {
   isloggedIn(): boolean {
     return this.authService.IsLoggedIn;
   }
+
+
+  addToCart(product: Producto): void {
+  this.cartService.addToCart(product);
+  console.log("Producto añadido al carrito en products:", product);
+  this.snackBar.open(`${product.nombre} ha sido añadido al carrito.`, 'Cerrar', {
+    duration: 3000,
+    panelClass: ['snackbar-success'],
+    horizontalPosition: 'right',
+    verticalPosition: 'top'
+  });
+}
+
 
   ngOnInit(): void {
     this.obtenerProductos();

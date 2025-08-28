@@ -1,4 +1,4 @@
-import { Component,Input,Output,EventEmitter, OnInit } from '@angular/core';
+import { Component,Input,Output,EventEmitter, OnInit, output } from '@angular/core';
 import { Producto } from '../../../core/models/ProductosModel';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { AuthService } from '../../../core/service/auth.service';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../../../core/service/cart.service';
 
 
 @Component({
@@ -20,13 +21,15 @@ export class ProductComponent implements OnInit {
   @Input() Product!:Producto
   @Output() editar = new EventEmitter<Producto>();
   @Output() eliminar= new EventEmitter<number>();
+  @Output() addToCartEvent = new EventEmitter<Producto>();
+
 
   isAdmin: boolean = false;
 
   constructor( 
-    private dialog: MatDialog, private AuthService: AuthService){
-   
-  }
+    private dialog: MatDialog, private AuthService: AuthService,
+  private cartService: CartService
+  ) {  }
 
   actualizarProducto(){
     console.log("El producto a actializar es ", this.Product);
@@ -55,5 +58,12 @@ export class ProductComponent implements OnInit {
     });
   }
 
+  addToCart(product: Producto): void {
+    console.log("Producto añadido al carrito:", product);
+    this.cartService.addToCart(product);
+    this.addToCartEvent.emit(product);
+    
   }
+
+}
 

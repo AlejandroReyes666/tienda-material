@@ -21,6 +21,10 @@
       <mat-icon>add</mat-icon>
       Agregar Producto
     </button>
+    <button class="btn-carrito" mat-raised-button color="accent" routerLink="/shoppingcart">
+      <mat-icon>shopping_cart</mat-icon>
+      Ver Carrito
+    </button>
   </div>
 
 </div>
@@ -28,7 +32,9 @@
 <section *ngIf="productos.length > 0; else sinProductos">
   <div class="producto-container"> 
     <div *ngFor="let producto of productos" class="producto">
-        <app-product [Product]="producto" (eliminar)="eliminarProducto($event)" (editar)="openDialog(producto)"></app-product>    
+        <app-product [Product]="producto" (eliminar)="eliminarProducto($event)" 
+        (editar)="openDialog(producto)"  
+        (agregarAlCarrito)="addToCart(producto)">></app-product>    
     </div>
   </div>
 </section>
