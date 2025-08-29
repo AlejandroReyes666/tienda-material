@@ -1,44 +1,52 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import {Producto} from '../models/ProductosModel';
+import { Producto } from '../models/ProductosModel';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class CartService {
   private cartItems: Producto[] = [];
-  private cartItemsSubject = new BehaviorSubject<Producto[]>(this.cartItems);
+  private cartItemsSubject = new BehaviorSubject<Producto[]>(this.getCartFromStorage());
 
-  constructor() { 
-    const storedCart = localStorage.getItem('cartItems');
-    if (storedCart) {
-      this.cartItems = JSON.parse(storedCart);
-      this.cartItemsSubject.next(this.cartItems);
-    }
+  cartItems$ = this.cartItemsSubject.asObservable(); // 👈 Exponemos el observable
+
+  constructor() {
+    // Escuchar cambios desde otras pestañas
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'cart') {
+        const updatedCart = JSON.parse(event.newValue || '[]');
+        this.cartItems = updatedCart;
+        this.cartItemsSubject.next([...this.cartItems]);
+      }
+    });
+  }
+
+  private getCartFromStorage(): Producto[] {
+    const stored = localStorage.getItem('cart');
+    return stored ? JSON.parse(stored) : [];
+  }
+
+  private updateCartItems(items: Producto[]): void {
+    this.cartItems = items;
+    localStorage.setItem('cart', JSON.stringify(this.cartItems));
+    this.cartItemsSubject.next([...this.cartItems]);
   }
 
   addToCart(product: Producto): void {
-    this.cartItems.push(product);
-    this.updateCartItems(this.cartItems);
+    const updated = [...this.cartItems, product];
+    this.updateCartItems(updated);
   }
+
   removeFromCart(productId: number): void {
-    this.cartItems = this.cartItems.filter(item => item.id !== productId);
-    this.updateCartItems(this.cartItems);
+    const updated = this.cartItems.filter(item => item.id !== productId);
+    this.updateCartItems(updated);
   }
 
   clearCart(): void {
-    this.cartItems = [];
-    this.updateCartItems(this.cartItems);
+    this.updateCartItems([]);
   }
 
-  updateCartItems(items: Producto[]): void {
-    this.cartItemsSubject.next([...this.cartItems]);
-    localStorage.setItem('cart', JSON.stringify(this.cartItems));
-  }
-
-  getCartItems():Producto[] {
+  getCartItems(): Producto[] {
     return [...this.cartItems];
-    
   }
 
   getTotalPrice(): number {

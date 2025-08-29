@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CartService } from '../../core/service/cart.service';
 import { Producto } from '../../core/models/ProductosModel';
 import { ProductComponent } from '../../shared/product/product/product.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -11,26 +12,21 @@ import { ProductComponent } from '../../shared/product/product/product.component
   styleUrl: './cart.component.scss'
 })
 export class CartComponent {
-  cartItems: Producto[] = [];
+  cartItems$: Observable<Producto[]>; 
   totalPrice: number = 0;
 
   constructor(private cartService: CartService) {
-    this.loadCart();
-  }
-
-  loadCart(): void {
-    this.cartItems = this.cartService.getCartItems();
-    this.getTotalPrice();
+     this.cartItems$ = this.cartService.cartItems$;
   }
 
   removeItem(productId: number): void {
     this.cartService.removeFromCart(productId);
-    this.loadCart();
+    
   }
 
   clearCart(): void {
     this.cartService.clearCart();
-    this.loadCart();
+    
   }
 
   getTotalPrice(): number {

@@ -1,11 +1,11 @@
-<div>
-    <h2>Shopping Cart</h2>
-    <div *ngIf="cartItems.length === 0">
-        <p>Your cart is empty.</p>
-    </div>
-    <div *ngIf="cartItems.length > 0">
-        <app-product *ngFor="let item of cartItems" [Product]="item"></app-product>
-        <p>Total: ${{ getTotalPrice() }}</p>
-        <button (click)="clearCart()">Clear Cart</button>
-    </div>
+<div *ngIf="cartItems$ | async as items">
+  <div *ngFor="let item of items" class="cart-item">
+    <app-product [Product]="item"></app-product>
+    <button mat-button color="warn" (click)="removeItem(item.id)">Eliminar</button>
+  </div>
+
+  <div class="cart-total">
+    <p>Total: ${{ getTotalPrice() }}</p>
+    <button mat-raised-button color="accent" (click)="clearCart()">Vaciar carrito</button>
+  </div>
 </div>
