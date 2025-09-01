@@ -1,7 +1,7 @@
 <div *ngIf="cartItems$ | async as items">
   <div *ngFor="let item of items" class="cart-item">
-    <app-product [Product]="item"></app-product>
-    <button mat-button color="warn" (click)="removeItem(item.id)">Eliminar</button>
+    <app-product [Product]="item.product"></app-product>
+    <div>{{item.quantity}}</div>
   </div>
 
   <div class="cart-total">

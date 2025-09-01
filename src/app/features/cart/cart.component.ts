@@ -4,6 +4,7 @@ import { CartService } from '../../core/service/cart.service';
 import { Producto } from '../../core/models/ProductosModel';
 import { ProductComponent } from '../../shared/product/product/product.component';
 import { Observable } from 'rxjs';
+import { CartItem } from '../../core/models/cartItemsModel';
 
 @Component({
   selector: 'app-cart',
@@ -12,16 +13,11 @@ import { Observable } from 'rxjs';
   styleUrl: './cart.component.scss'
 })
 export class CartComponent {
-  cartItems$: Observable<Producto[]>; 
+  cartItems$: Observable<CartItem[]>; 
   totalPrice: number = 0;
 
   constructor(private cartService: CartService) {
      this.cartItems$ = this.cartService.cartItems$;
-  }
-
-  removeItem(productId: number): void {
-    this.cartService.removeFromCart(productId);
-    
   }
 
   clearCart(): void {

@@ -8,6 +8,8 @@ import { MatIcon } from '@angular/material/icon';
 import { AuthService } from '../../../core/service/auth.service';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../core/service/cart.service';
+import { CartItem } from '../../../core/models/cartItemsModel';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -22,7 +24,8 @@ export class ProductComponent implements OnInit {
   @Output() editar = new EventEmitter<Producto>();
   @Output() eliminar= new EventEmitter<number>();
   @Output() addToCartEvent = new EventEmitter<Producto>();
-
+  
+  cartItems$!: Observable<CartItem[]>; 
 
   isAdmin: boolean = false;
 
@@ -53,7 +56,8 @@ export class ProductComponent implements OnInit {
 }
 
   ngOnInit(): void {
-   this.AuthService.role$.subscribe(role => {
+    this.cartItems$ = this.cartService.cartItems$;
+    this.AuthService.role$.subscribe(role => {
       this.isAdmin = role === 'administrador';
     });
   }
@@ -64,6 +68,24 @@ export class ProductComponent implements OnInit {
     this.addToCartEvent.emit(product);
     
   }
+
+   removeItem(productId: number): void {
+    this.cartService.removeFromCart(productId);
+    
+  }
+
+  removeOne(product: Producto) {
+  this.cartService.removeOneFromCart(product);
+}
+
+
+  isProductInCart(items: CartItem[], productId: number): boolean {
+  console.log("resultado en isProductInCart: ", items.some(item => item.product.id === productId));
+  return items.some(item => item.product.id === productId);
+}
+
+
+
 
 }
 

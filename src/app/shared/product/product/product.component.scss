@@ -169,3 +169,18 @@ mat-card img {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
+
+.button {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  flex: 1 1 45%; // permite que se acomoden bien en fila
+  min-width: 0;
+  font-weight: bold;
+
+}

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Producto } from '../models/ProductosModel';
+import { CartItem } from '../models/cartItemsModel';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
-  private cartItems: Producto[] = [];
-  private cartItemsSubject = new BehaviorSubject<Producto[]>(this.getCartFromStorage());
+  private cartItems: CartItem[] = [];
+  private cartItemsSubject = new BehaviorSubject<CartItem[]>(this.getCartFromStorage());
 
   cartItems$ = this.cartItemsSubject.asObservable(); // 👈 Exponemos el observable
 
@@ -20,36 +21,62 @@ export class CartService {
     });
   }
 
-  private getCartFromStorage(): Producto[] {
+  private getCartFromStorage(): CartItem[] {
     const stored = localStorage.getItem('cart');
     return stored ? JSON.parse(stored) : [];
   }
 
-  private updateCartItems(items: Producto[]): void {
+  private updateCartItems(items: CartItem[]): void {
     this.cartItems = items;
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
     this.cartItemsSubject.next([...this.cartItems]);
   }
 
-  addToCart(product: Producto): void {
-    const updated = [...this.cartItems, product];
-    this.updateCartItems(updated);
+addToCart(product: Producto): void {
+  const items = this.cartItemsSubject.getValue();
+  const index = items.findIndex(item => item.product.id === product.id);
+
+  if (index > -1) {
+    items[index].quantity += 1;
+  } else {
+    items.push({ product, quantity: 1 }); // 👈 no product.Product
   }
+
+  this.updateCartItems(items);
+}
+
 
   removeFromCart(productId: number): void {
-    const updated = this.cartItems.filter(item => item.id !== productId);
-    this.updateCartItems(updated);
+  const updated = this.cartItems.filter(item => item.product.id !== productId);
+  this.updateCartItems(updated);
+}
+
+removeOneFromCart(product: Producto): void {
+  const items = this.cartItemsSubject.getValue();
+  const index = items.findIndex(item => item.product.id === product.id);
+
+  if (index > -1) {
+    if (items[index].quantity > 1) {
+      items[index].quantity -= 1;
+    } else {
+      items.splice(index, 1);
+    }
+    this.updateCartItems(items);
   }
+}
+
+
 
   clearCart(): void {
+    alert("carrito vacio");
     this.updateCartItems([]);
   }
 
-  getCartItems(): Producto[] {
+  getCartItems(): CartItem[] {
     return [...this.cartItems];
   }
 
   getTotalPrice(): number {
-    return this.cartItems.reduce((total, item) => total + item.precio, 0);
+    return this.cartItems.reduce((total, item) => total + item.product.precio, 0);
   }
 }

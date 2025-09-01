@@ -15,12 +15,27 @@
     <p>{{Product.descripcion}}</p>
     <br>
     <p class="precio">Precio: {{Product.enOferta?  Product.precioOferta : Product.precio}}</p>
+    
   </mat-card-content>
  <mat-card-actions>
     <div class="button">
-      <button mat-flat-button color="primary" (click)="addToCart(Product)">
-        <mat-icon>add_shopping_cart</mat-icon> Añadir al carrito
-      </button>
+      <ng-container *ngIf="cartItems$ | async as items">
+        <ng-container *ngIf="isProductInCart(items, Product.id) as inCart">
+          <button mat-flat-button color="primary" (click)="addToCart(Product)">
+            <mat-icon>{{ inCart ? 'shopping_cart' : 'add_shopping_cart' }}</mat-icon>
+              {{ inCart ? 'Agregar otro' : 'Añadir al carrito' }}
+            </button>
+
+    <button class="btn-eliminar" *ngIf="inCart"
+            mat-flat-button color="primary" (click)="removeOne(Product)">
+      <mat-icon>delete</mat-icon>
+      Eliminar
+    </button>
+  </ng-container>
+</ng-container>
+>
+
+
       <button *ngIf="isAdmin" mat-flat-button class="btn-editar" (click)="actualizarProducto()">
         <mat-icon>edit</mat-icon> Editar
       </button>
