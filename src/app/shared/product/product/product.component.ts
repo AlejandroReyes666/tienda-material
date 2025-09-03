@@ -69,6 +69,9 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartItems$ = this.cartService.cartItems$;
+    console.log('ID del producto:', this.Product?.id);
+
+    console.log("Lo que hay en catItems$ es: "+this.cartItems$);
     this.AuthService.role$.subscribe((role) => {
       this.isAdmin = role === 'administrador';
     });
@@ -95,4 +98,23 @@ export class ProductComponent implements OnInit {
     );
     return items.some((item) => item.product.id === productId);
   }
+
+  isOfertaActiva(product: Producto): boolean {
+  const hoy = new Date();
+  const inicio = product.fechaInicioOferta ? new Date(product.fechaInicioOferta) : null;
+  const fin = product.fechaFinOferta ? new Date(product.fechaFinOferta) : null;
+
+  return (
+    product.enOferta === true &&
+    inicio !== null &&
+    fin !== null &&
+    hoy >= inicio &&
+    hoy <= fin
+  );
+}
+
+
+
+
+
 }

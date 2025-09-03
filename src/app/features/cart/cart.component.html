@@ -1,11 +1,18 @@
-<div *ngIf="cartItems$ | async as items">
-  <div *ngFor="let item of items" class="cart-item">
-    <app-product [Product]="item.product"></app-product>
-    <div>{{item.quantity}}</div>
+<div class="producto-container">
+  <div *ngFor="let item of cartItems$ | async" class="producto">
+    <div class="producto-card-wrapper">
+      <app-product [Product]="item.product"></app-product>
+      <div></div>
+      <div class="cantidad">x{{ item.quantity }}</div>
+      <div class="acciones">
+        <div class="subtotal">Subtotal: ${{ item.product.precio * item.quantity }}</div>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div class="cart-total">
-    <p>Total: ${{ getTotalPrice() }}</p>
-    <button mat-raised-button color="accent" (click)="clearCart()">Vaciar carrito</button>
-  </div>
+
+<div class="cart-total">
+  <p>Total: ${{ getTotalPrice() }}</p>
+  <button mat-raised-button color="accent" (click)="clearCart()">Vaciar carrito</button>
 </div>

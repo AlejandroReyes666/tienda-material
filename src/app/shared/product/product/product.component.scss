@@ -67,21 +67,15 @@ mat-card-actions {
   padding: 8px 16px;
 }
 
-.button-group {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 10px;
-  
+
+
+.button {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
 }
 
-button {
-  flex: 1 1 auto; /* permite que crezca o se encoja */
-  min-width: 0;   /* importante para evitar overflow en flex */
-  font-weight: bold;
-  background-color: #3F51B5;
-  
-}
+
 
 .btn-editar {
   background-color: #3F51B5;
@@ -172,15 +166,4 @@ mat-card img {
 
 
 
-.button {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  justify-content: space-between;
-  flex-wrap: wrap;
 
-  flex: 1 1 45%; // permite que se acomoden bien en fila
-  min-width: 0;
-  font-weight: bold;
-
-}

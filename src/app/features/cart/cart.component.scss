@@ -1,0 +1,59 @@
+.producto-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  padding: 24px;
+  background-color: #f9f9f9;
+}
+
+.producto {
+  height: 100%;
+  width: 280px;
+  flex: 0 0 auto;
+}
+
+.producto-card-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 320px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 16px;
+  overflow: hidden;
+}
+
+.cantidad {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #F44336;
+  color: white;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.acciones {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  right: 16px;
+  transform: translateY(150%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.subtotal {
+  position: static; /* Ya no es absolute */
+  background-color: #3F51B5;
+  color: white;
+  font-size: 0.75rem;
+  padding: 4px 6px;
+  border-radius: 8px;
+}

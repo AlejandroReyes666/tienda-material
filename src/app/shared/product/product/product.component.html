@@ -14,27 +14,29 @@
   <mat-card-content>
     <p>{{Product.descripcion}}</p>
     <br>
-    <p class="precio">Precio: {{Product.enOferta?  Product.precioOferta : Product.precio}}</p>
-    
+    <p class="precio">Precio: {{isOfertaActiva(Product) ? Product.precioOferta : Product.precio}}
+</p>
+
+  
   </mat-card-content>
- <mat-card-actions>
+  <mat-card-actions>
     <div class="button">
       <ng-container *ngIf="cartItems$ | async as items">
-        <ng-container *ngIf="isProductInCart(items, Product.id) as inCart">
-          <button mat-flat-button color="primary" (click)="addToCart(Product)">
-            <mat-icon>{{ inCart ? 'shopping_cart' : 'add_shopping_cart' }}</mat-icon>
-              {{ inCart ? 'Agregar otro' : 'Añadir al carrito' }}
-            </button>
+        <button mat-flat-button color="primary" (click)="addToCart(Product)">
+          <mat-icon>
+            {{ isProductInCart(items, Product.id) ? 'shopping_cart' : 'add_shopping_cart' }}
+          </mat-icon>
+          {{ isProductInCart(items, Product.id) ? 'Agregar otro' : 'Añadir al carrito' }}
+        </button>
 
-    <button class="btn-eliminar" *ngIf="inCart"
-            mat-flat-button color="primary" (click)="removeOne(Product)">
-      <mat-icon>delete</mat-icon>
-      Eliminar
-    </button>
-  </ng-container>
-</ng-container>
->
-
+        <button class="btn-eliminar"
+                *ngIf="isProductInCart(items, Product.id)"
+                mat-flat-button color="primary"
+                (click)="removeOne(Product)">
+          <mat-icon>delete</mat-icon>
+          Eliminar
+        </button>
+      </ng-container>
 
       <button *ngIf="isAdmin" mat-flat-button class="btn-editar" (click)="actualizarProducto()">
         <mat-icon>edit</mat-icon> Editar
@@ -43,5 +45,7 @@
         <mat-icon>delete</mat-icon> Eliminar
       </button>
     </div>
-</mat-card-actions>
+  </mat-card-actions>
+
+  
 </mat-card>

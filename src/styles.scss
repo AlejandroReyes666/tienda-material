@@ -57,12 +57,7 @@ mat-card-title.multiline {
   overflow: hidden;
 }
 
-.producto-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 350px; /* ajusta según tu diseño */
-}
+
 
 mat-card-content p {
   min-height: 20px; /* evita que descripciones cortas deformen la card */

@@ -17,6 +17,7 @@ export class CartService {
         const updatedCart = JSON.parse(event.newValue || '[]');
         this.cartItems = updatedCart;
         this.cartItemsSubject.next([...this.cartItems]);
+        console.log("emitiendo carrito:",this.cartItems);
       }
     });
   }
@@ -30,6 +31,7 @@ export class CartService {
     this.cartItems = items;
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
     this.cartItemsSubject.next([...this.cartItems]);
+    console.log("emitiendo carrito:",this.cartItems);
   }
 
 addToCart(product: Producto): void {
@@ -77,6 +79,6 @@ removeOneFromCart(product: Producto): void {
   }
 
   getTotalPrice(): number {
-    return this.cartItems.reduce((total, item) => total + item.product.precio, 0);
+    return this.cartItems.reduce((total, item) => total + (item.product.precio*item.quantity), 0);
   }
 }
