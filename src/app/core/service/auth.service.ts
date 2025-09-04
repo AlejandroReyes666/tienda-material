@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-  constructor() { }
+  constructor() {}
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
-  private role = new BehaviorSubject<string|null>(localStorage.getItem('role'));
+  private role = new BehaviorSubject<string | null>(
+    localStorage.getItem('role')
+  );
 
   isLoggedIn$ = this.loggedIn.asObservable();
   role$ = this.role.asObservable();
@@ -17,25 +18,25 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-loggedSuccess(rol: string | null = null, token: string | null) {
-  if (!token) return; // por seguridad, no guardamos si viene vacío
-  localStorage.setItem('token', token);
+  loggedSuccess(rol: string | null = null, token: string | null) {
+    if (!token) return; // por seguridad, no guardamos si viene vacío
+    localStorage.setItem('token', token);
 
-  if (rol) {
-    localStorage.setItem('role', rol);
+    if (rol) {
+      localStorage.setItem('role', rol);
+    }
+    this.loggedIn.next(true);
+    this.role.next(rol);
   }
-  this.loggedIn.next(true);
-  this.role.next(rol);
-}
 
   loggedOut() {
-  localStorage.removeItem('token');
-  localStorage.removeItem('role');
-  localStorage.removeItem('user');
-  this.loggedIn.next(false);
-  this.role.next(null);
-  console.log('Logged out successfully');
-}
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('user');
+    this.loggedIn.next(false);
+    this.role.next(null);
+    console.log('Logged out successfully');
+  }
 
   get CurrentRole(): string | null {
     return this.role.value;

@@ -7,6 +7,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { Router } from '@angular/router';
+import { AuthService } from '../../core/service/auth.service';
 @Component({
   selector: 'app-productos-destacados',
   imports: [CommonModule, SlickCarouselModule,MatButtonModule,MatCardModule],
@@ -18,7 +19,8 @@ export class ProductosDestacadosComponent implements OnInit {
 
   constructor(private ProductoSevice:ProductoServiceService,
     private snackBar: MatSnackBar,
-    private router:Router
+    private router:Router,
+    private authService: AuthService
     
   ){
   }
@@ -58,7 +60,13 @@ export class ProductosDestacadosComponent implements OnInit {
 };
 
 verMas(){
-  this.router.navigate(['/login']);
+   
+    if (this.authService.IsLoggedIn) {
+      console.log("dentro de a función"+this.authService.IsLoggedIn);
+      this.router.navigate(['/products']);
+    } else {
+      this.router.navigate(['/login']);
+    }
 }
 
 
