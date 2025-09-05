@@ -6,71 +6,84 @@ import { CartItem } from '../models/cartItemsModel';
 @Injectable({ providedIn: 'root' })
 export class CartService {
   private cartItems: CartItem[] = [];
-  private cartItemsSubject = new BehaviorSubject<CartItem[]>(this.getCartFromStorage());
+  private cartItemsSubject = new BehaviorSubject<CartItem[]>(
+    this.getCartFromStorage()
+  );
 
-  cartItems$ = this.cartItemsSubject.asObservable(); // 👈 Exponemos el observable
+  cartItems$ = this.cartItemsSubject.asObservable();
 
   constructor() {
     // Escuchar cambios desde otras pestañas
     window.addEventListener('storage', (event) => {
-      if (event.key === 'cart') {
+      if (event.key === this.getCartKey()) {
         const updatedCart = JSON.parse(event.newValue || '[]');
         this.cartItems = updatedCart;
         this.cartItemsSubject.next([...this.cartItems]);
-        console.log("emitiendo carrito:",this.cartItems);
+        console.log('Carrito actualizado desde otra pestaña:', this.cartItems);
       }
     });
   }
 
+  private getCartKey(): string {
+    const token = localStorage.getItem('token');
+    return token ? `cart_${token}` : 'cart_guest';
+  }
+
   private getCartFromStorage(): CartItem[] {
-    const stored = localStorage.getItem('cart');
+    const key = this.getCartKey();
+    const stored = localStorage.getItem(key);
     return stored ? JSON.parse(stored) : [];
   }
 
   private updateCartItems(items: CartItem[]): void {
+    const key = this.getCartKey();
     this.cartItems = items;
-    localStorage.setItem('cart', JSON.stringify(this.cartItems));
+    localStorage.setItem(key, JSON.stringify(this.cartItems));
     this.cartItemsSubject.next([...this.cartItems]);
-    console.log("emitiendo carrito:",this.cartItems);
+    console.log('Carrito actualizado:', this.cartItems);
   }
 
-addToCart(product: Producto): void {
-  const items = this.cartItemsSubject.getValue();
-  const index = items.findIndex(item => item.product.id === product.id);
-
-  if (index > -1) {
-    items[index].quantity += 1;
-  } else {
-    items.push({ product, quantity: 1 }); // 👈 no product.Product
+  reloadCart(): void {
+    const items = this.getCartFromStorage();
+    this.cartItems = items;
+    this.cartItemsSubject.next([...items]);
   }
 
-  this.updateCartItems(items);
-}
+  addToCart(product: Producto): void {
+    const items = this.cartItemsSubject.getValue();
+    const index = items.findIndex((item) => item.product.id === product.id);
 
-
-  removeFromCart(productId: number): void {
-  const updated = this.cartItems.filter(item => item.product.id !== productId);
-  this.updateCartItems(updated);
-}
-
-removeOneFromCart(product: Producto): void {
-  const items = this.cartItemsSubject.getValue();
-  const index = items.findIndex(item => item.product.id === product.id);
-
-  if (index > -1) {
-    if (items[index].quantity > 1) {
-      items[index].quantity -= 1;
+    if (index > -1) {
+      items[index].quantity += 1;
     } else {
-      items.splice(index, 1);
+      items.push({ product, quantity: 1 });
     }
+
     this.updateCartItems(items);
   }
-}
 
+  removeFromCart(productId: number): void {
+    const updated = this.cartItems.filter(
+      (item) => item.product.id !== productId
+    );
+    this.updateCartItems(updated);
+  }
 
+  removeOneFromCart(product: Producto): void {
+    const items = this.cartItemsSubject.getValue();
+    const index = items.findIndex((item) => item.product.id === product.id);
+
+    if (index > -1) {
+      if (items[index].quantity > 1) {
+        items[index].quantity -= 1;
+      } else {
+        items.splice(index, 1);
+      }
+      this.updateCartItems(items);
+    }
+  }
 
   clearCart(): void {
-    alert("carrito vacio");
     this.updateCartItems([]);
   }
 
@@ -79,6 +92,9 @@ removeOneFromCart(product: Producto): void {
   }
 
   getTotalPrice(): number {
-    return this.cartItems.reduce((total, item) => total + (item.product.precio*item.quantity), 0);
+    return this.cartItems.reduce(
+      (total, item) => total + item.product.precio * item.quantity,
+      0
+    );
   }
 }

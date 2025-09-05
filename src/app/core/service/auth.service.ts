@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { CartService } from './cart.service';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor() {}
+  constructor( private cartService:CartService
+  ) {}
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
   private role = new BehaviorSubject<string | null>(
     localStorage.getItem('role')
@@ -27,10 +30,17 @@ export class AuthService {
     }
     this.loggedIn.next(true);
     this.role.next(rol);
+    this.cartService.reloadCart();
+    
   }
 
   loggedOut() {
-    localStorage.removeItem('token');
+    const token = localStorage.getItem('token');
+    if (token) {
+      
+      localStorage.removeItem('token');
+    }
+    this.cartService.clearCart();
     localStorage.removeItem('role');
     localStorage.removeItem('user');
     this.loggedIn.next(false);
