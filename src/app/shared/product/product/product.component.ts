@@ -1,17 +1,11 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnInit,
-  output,
-} from '@angular/core';
+import { Component,Input,Output,EventEmitter,OnInit} from '@angular/core';
 import { Producto } from '../../../core/models/ProductosModel';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { DialogEliminarComponent } from '../../../shared/dialogEliminar/dialog-eliminar/dialog-eliminar.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
 import { AuthService } from '../../../core/service/auth.service';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../core/service/cart.service';
@@ -27,6 +21,7 @@ import { Observable } from 'rxjs';
     DialogEliminarComponent,
     MatIcon,
     CommonModule,
+    MatChipsModule
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',

@@ -1,3 +1,117 @@
+
+.producto-card {
+  width: 280px;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center; /* opcional para centrar */
+
+
+}
+
+.producto-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+}
+
+/* ✅ Hover con contraste corregido */
+.producto-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #3F51B5;
+  color: white;
+}
+
+/* ✅ Forzar color blanco en elementos internos usando ::ng-deep */
+::ng-deep .producto-card:hover .precio,
+::ng-deep .producto-card:hover .multiline,
+::ng-deep .producto-card:hover mat-card-title,
+::ng-deep .producto-card:hover mat-card-subtitle,
+::ng-deep .producto-card:hover mat-chip,
+::ng-deep .producto-card:hover mat-chip span {
+  color: white !important;
+}
+
+/* ✅ Ajustar fondo del chip en hover */
+::ng-deep .producto-card:hover mat-chip {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border: none;
+}
+
+/* ✅ Precio destacado */
+.precio {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.card-actions {
+  padding: 12px;
+}
+
+.button {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Botón: Agregar */
+.btn-agregar {
+  background-color: #27368d;
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 8px 12px;
+  flex: 1 1 45%;
+  min-width: 120px;
+}
+
+/* Botón: Eliminar */
+.btn-eliminar-carrito {
+  background-color: #F44336;
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 8px 12px;
+  flex: 1 1 45%;
+  min-width: 120px;
+}
+
+/* Botones de admin */
+.btn-editar,
+.btn-eliminar {
+  flex: 1 1 45%;
+  min-width: 120px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.btn-editar {
+  background-color: #3F51B5;
+  color: white;
+}
+
+.btn-eliminar {
+  background-color: #F44336;
+  color: white;
+}
+
+/* Responsive para móvil */
 @media (max-width: 480px) {
   .button {
     flex-direction: column;
@@ -8,191 +122,3 @@
     width: 100%;
   }
 }
-
-
-
-::ng-deep mat-card-title {
-  font-weight: 600;
-  color: #212121;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis
-}
-
-::ng-deep mat-card-title:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  background-color: #3F51B5;
-  color: white;
-}
-
-::ng-deep mat-card-subtitle {
-  color: #757575;
-  font-weight: 400;
-  transition: all 0.3s ease;
-}
-
-::ng-deep mat-card-subtitle:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  background-color: #3F51B5;
-  color: white;
-}
-
-mat-card img {
-  border-radius: 8px;
-}
-
-mat-card-actions {
-  padding: 8px 16px;
-}
-
-
-::ng-deep mat-icon {
-  font-size: 20px;
-  vertical-align: middle;
-  margin-right: 6px;
-  line-height: 1;
-  display: inline-block;
-}
-
-::ng-deep button[mat-flat-button] {
-  min-width: 120px;
-  padding: 8px 12px;
-  white-space: nowrap;
-  flex: 1 1 auto;
-}
-
-.producto-card {
-  width: 240px;
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 350px; /* ajusta según tu diseño */
-  
-}
-
-.producto-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover; /* Recorta sin deformar */
-  border-radius: 12px 12px 0 0;
-}
-
-.producto-card:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  background-color: #3F51B5;
-  color: white;
-}
-
-.example-header-image {
-  background-image: url('https://material.angular.dev/assets/img/examples/shiba1.jpg');
-  background-size: cover;
-  background-position: center;
-  border-radius: 50%;
-}
-
-
-.button {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: space-between;
-}
-
-
-.btn-eliminar-carrito {
-  margin-left: auto;
-}
-
-.btn-editar {
-  background-color: #3F51B5;
-  color: white;
-  border-radius: 8px;
-  font-weight: 500;
-  mat-icon {
-    margin-right: 4px;
-  }
-}
-
-.btn-eliminar, 
-.btn-eliminar-carrito {
-  background-color: #F44336;
-  color: white;
-  border-radius: 8px;
-  font-weight: 500;
-  mat-icon {
-    margin-right: 4px;
-  }
-}
-
-.card-actions {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 8px;
-  overflow: visible;
-  color: white;
-}
-
-
-.card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.card-content {
-  flex-grow: 1;
-  padding: 12px;
-  word-wrap: break-word;
-}
-
-.card-footer {
-  padding: 8px 12px;
-}
-
-
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.card {
-  width: 280px;
-  min-height: 420px;
-}
-
-.producto-card {
-  width: 280px;
-  min-height: 520px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-
-.producto-card h2,
-.producto-card p {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-
-
-

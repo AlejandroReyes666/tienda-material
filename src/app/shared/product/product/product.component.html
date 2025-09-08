@@ -2,7 +2,10 @@
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title class="multiline">{{ Product.nombre }}</mat-card-title>
-    <mat-card-subtitle>{{ Product.categoria }}</mat-card-subtitle>
+    <mat-card-subtitle class="multiline">
+      <mat-chip class="multiline" selected>{{ Product.categoria }}</mat-chip>
+    </mat-card-subtitle>
+    
   </mat-card-header>
 
   <img
@@ -14,15 +17,17 @@
   <mat-card-content>
     <p>{{Product.descripcion}}</p>
     <br>
-    <p class="precio">Precio: {{isOfertaActiva(Product) ? Product.precioOferta : Product.precio}}
-</p>
-
+    <p class="precio"> 
+      <mat-chip color="accent" selected>
+        Precio: {{ isOfertaActiva(Product) ? Product.precioOferta : Product.precio }}
+      </mat-chip>
+    </p>
   
   </mat-card-content>
-  <mat-card-actions>
+  <mat-card-actions class="card-actions">
     <div class="button">
       <ng-container *ngIf="cartItems$ | async as items">
-        <button *ngIf="!isAdmin" mat-flat-button color="primary" (click)="addToCart(Product)">
+        <button class="btn-agregar" *ngIf="!isAdmin" mat-flat-button color="primary" matTooltip="Agrega este producto al carrito" (click)="addToCart(Product)">
           <ng-container *ngIf="isProductInCart(items, Product.id); else addIcon">
             <mat-icon>shopping_cart</mat-icon>
           </ng-container>
