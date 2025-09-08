@@ -35,11 +35,8 @@ export class AuthService {
   }
 
   loggedOut() {
-    const token = localStorage.getItem('token');
-    if (token) {
       
-      localStorage.removeItem('token');
-    }
+    localStorage.removeItem('token');
     this.cartService.clearCart();
     localStorage.removeItem('role');
     localStorage.removeItem('user');
@@ -47,6 +44,8 @@ export class AuthService {
     this.role.next(null);
     console.log('Logged out successfully');
   }
+
+  
 
   get CurrentRole(): string | null {
     return this.role.value;
