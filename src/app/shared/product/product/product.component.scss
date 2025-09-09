@@ -62,11 +62,31 @@
 }
 
 .button {
+  top: 50%;
+  left: 20px;
+  right: 16px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  justify-content: space-between;
   align-items: center;
+}
+
+.btn-agregar,
+.btn-eliminar-carrito,
+.btn-editar,
+.btn-eliminar {
+  display: flex;              /* Ícono y texto en fila */
+  align-items: center;        /* Centrado vertical */
+  justify-content: center;    /* Centrado horizontal */
+  gap: 6px;                   /* Espacio entre ícono y texto */
+}
+
+.btn-agregar mat-icon,
+.btn-eliminar-carrito mat-icon,
+.btn-editar mat-icon,
+.btn-eliminar mat-icon {
+  font-size: 20px;            /* Tamaño uniforme */
+  margin: 0;                  /* Sin márgenes extra */
 }
 
 /* Botón: Agregar */
@@ -76,8 +96,8 @@
   border-radius: 8px;
   font-weight: 500;
   padding: 8px 12px;
-  flex: 1 1 45%;
-  min-width: 120px;
+  flex: 1 1 50%;
+  min-width: 100px;
 }
 
 /* Botón: Eliminar */
@@ -88,7 +108,7 @@
   font-weight: 500;
   padding: 8px 12px;
   flex: 1 1 45%;
-  min-width: 120px;
+  min-width: 100px;
 }
 
 /* Botones de admin */
@@ -99,6 +119,15 @@
   padding: 8px 12px;
   border-radius: 8px;
   font-weight: 500;
+}
+
+.btn-agregar mat-icon,
+.btn-eliminar-carrito mat-icon,
+.btn-editar mat-icon,
+.btn-eliminar mat-icon {
+  font-size: 20px;            /* Tamaño uniforme */
+  margin: 0;
+  vertical-align: middle;                  /* Sin márgenes extra */
 }
 
 .btn-editar {

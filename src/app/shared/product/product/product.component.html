@@ -27,14 +27,14 @@
   <mat-card-actions class="card-actions">
     <div class="button">
       <ng-container *ngIf="cartItems$ | async as items">
-        <button class="btn-agregar" *ngIf="!isAdmin" mat-flat-button color="primary" matTooltip="Agrega este producto al carrito" (click)="addToCart(Product)">
+        <button class="btn-agregar" *ngIf="!isAdmin" mat-flat-button color="primary" (click)="addToCart(Product)">
           <ng-container *ngIf="isProductInCart(items, Product.id); else addIcon">
             <mat-icon>shopping_cart</mat-icon>
           </ng-container>
           <ng-template #addIcon>
             <mat-icon>add_shopping_cart</mat-icon>
           </ng-template>
-          {{ isProductInCart(items, Product.id) ? 'Agregar otro' : 'Añadir al carrito' }}
+          {{ isProductInCart(items, Product.id) ? 'Agregar' : 'Añadir al carrito' }}
         </button>
 
         <button  class="btn-eliminar-carrito"
