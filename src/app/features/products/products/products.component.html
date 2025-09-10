@@ -22,11 +22,35 @@
             name="busquedaNombre"
             (ngModelChange)="filtrarProductos()"
           />
-
           <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''; filtrarProductos()">
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
+        
+        <mat-form-field appearance="fill">
+          <mat-label>Precio mínimo</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="precioMinimo"
+            name="precioMinimo"
+            (ngModelChange)="filtrarProductos()"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Precio máximo</mat-label>
+         <input
+          matInput
+          type="number"
+          [(ngModel)]="precioMaximo"
+          name="precioMaximo"
+          (ngModelChange)="filtrarProductos()"
+        />
+        </mat-form-field>
+
+
+
       </form>
     </div>
 

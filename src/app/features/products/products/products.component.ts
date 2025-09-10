@@ -41,6 +41,8 @@ export class ProductsComponent implements OnInit,OnDestroy{
   myControl = new FormControl('');
   filteredOptions!: Observable<string[]>;
   value = '';
+  precioMinimo: number=0;
+  precioMaximo: number=Infinity;
 
 
   constructor(private serviceProducto:ProductoServiceService,
@@ -85,29 +87,6 @@ obtenerCategorias(){
   });
 }
 
-/*obtenerProductosPorCategoria() {
-  if (this.categoriaSeleccionada === ''|| !this.categoriaSeleccionada) {
-    this.productos = this.todosLosProductos;
-    return;
-  }
-
-  this.productos = this.todosLosProductos.filter(product =>
-    product.categoria?.toLowerCase().includes(this.categoriaSeleccionada.toLowerCase())
-  );
-}*/
-
-/*obtenerProductosPorNombre() {
-  const nombreBuscado =this.value?.toLowerCase() || '';
-  if (nombreBuscado === '') {
-    this.productos = this.todosLosProductos;
-    return;
-  }
-  this.productos = this.todosLosProductos.filter(product =>
-    product.nombre.toLowerCase().includes(nombreBuscado)
-  );
-}
-*/
-
 filtrarProductos() {
   const nombreBuscado = this.value?.toLowerCase() || '';
   const categoriaBuscada = this.categoriaSeleccionada?.toLowerCase() || '';
@@ -115,7 +94,10 @@ filtrarProductos() {
   this.productos = this.todosLosProductos.filter(product => {
     const coincideNombre = product.nombre.toLowerCase().includes(nombreBuscado);
     const coincideCategoria = categoriaBuscada === '' || product.categoria?.toLowerCase().includes(categoriaBuscada);
-    return coincideNombre && coincideCategoria;
+    const dentroRangoPrecio = product.precio >= this.precioMinimo && product.precio <= this.precioMaximo;
+
+    // El producto debe coincidir en nombre, categoría y estar dentro del rango de precio
+    return coincideNombre && coincideCategoria && dentroRangoPrecio;
   });
 }
 
