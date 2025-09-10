@@ -17,8 +17,8 @@ import { startWith, map } from 'rxjs/operators';
 import { MatSelectModule } from '@angular/material/select';
 import { AuthService } from '../../../core/service/auth.service';
 import{RouterModule} from '@angular/router';
-import { routes } from '../../../app.routes';
 import { CartService } from '../../../core/service/cart.service';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -26,7 +26,8 @@ import { CartService } from '../../../core/service/cart.service';
   standalone:true,
   imports: [CommonModule, ProductComponent, ProductDialogComponent,
     MatButtonModule, MatIconModule, MatAutocompleteModule,
-    MatInputModule, MatFormFieldModule, ReactiveFormsModule, MatSelectModule,RouterModule],
+    MatInputModule, MatFormFieldModule, ReactiveFormsModule, MatSelectModule,RouterModule,
+    FormsModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -39,6 +40,8 @@ export class ProductsComponent implements OnInit,OnDestroy{
 
   myControl = new FormControl('');
   filteredOptions!: Observable<string[]>;
+  value = '';
+
 
   constructor(private serviceProducto:ProductoServiceService,
     private dialog: MatDialog,
@@ -82,7 +85,7 @@ obtenerCategorias(){
   });
 }
 
-obtenerProductosPorCategoria() {
+/*obtenerProductosPorCategoria() {
   if (this.categoriaSeleccionada === ''|| !this.categoriaSeleccionada) {
     this.productos = this.todosLosProductos;
     return;
@@ -91,6 +94,29 @@ obtenerProductosPorCategoria() {
   this.productos = this.todosLosProductos.filter(product =>
     product.categoria?.toLowerCase().includes(this.categoriaSeleccionada.toLowerCase())
   );
+}*/
+
+/*obtenerProductosPorNombre() {
+  const nombreBuscado =this.value?.toLowerCase() || '';
+  if (nombreBuscado === '') {
+    this.productos = this.todosLosProductos;
+    return;
+  }
+  this.productos = this.todosLosProductos.filter(product =>
+    product.nombre.toLowerCase().includes(nombreBuscado)
+  );
+}
+*/
+
+filtrarProductos() {
+  const nombreBuscado = this.value?.toLowerCase() || '';
+  const categoriaBuscada = this.categoriaSeleccionada?.toLowerCase() || '';
+
+  this.productos = this.todosLosProductos.filter(product => {
+    const coincideNombre = product.nombre.toLowerCase().includes(nombreBuscado);
+    const coincideCategoria = categoriaBuscada === '' || product.categoria?.toLowerCase().includes(categoriaBuscada);
+    return coincideNombre && coincideCategoria;
+  });
 }
 
 

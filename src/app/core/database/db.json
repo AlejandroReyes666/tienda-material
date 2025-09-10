@@ -96,6 +96,14 @@
       "precioOferta": 15000,
       "fechaInicioOferta": "2025-08-11",
       "fechaFinOferta": "2025-08-18"
+    },
+    {
+      "id": "6e79",
+      "nombre": "ssasadas",
+      "precio": 30000,
+      "imageUrl": "https://www.superlosmontes.com/site/9848-large_default/limpia-pisos-fabuloso-lavanda-1lt.jpg",
+      "descripcion": "SDadSDfsdf",
+      "categoria": "sdsd"
     }
   ],
   "contactos": [

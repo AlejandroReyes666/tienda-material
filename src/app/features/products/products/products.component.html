@@ -1,43 +1,64 @@
-
 <!-- productos.component.html -->
- <div class="filtro-contenedor" *ngIf="isloggedIn()" else routerLink="login" routerLinkActive="actived" >
-  <br>
-  <div>
-    <form class="example-form">
-      <mat-form-field appearance="fill" class="filtro-categorias">
-       <mat-label>Elige una categoría</mat-label>
-         <mat-select [(value)]="categoriaSeleccionada" (selectionChange)="obtenerProductosPorCategoria()">
+<ng-container *ngIf="isloggedIn(); else loginRedirect">
+  <div class="filtro-contenedor">
+    <div>
+      <form class="example-form" (submit)="$event.preventDefault()">
+        <mat-form-field appearance="fill" class="filtro-categorias">
+          <mat-label>Elige una categoría</mat-label>
+          <mat-select [(value)]="categoriaSeleccionada" (selectionChange)="filtrarProductos()">
             <mat-option [value]="''">Todas las categorías</mat-option>
             <mat-option *ngFor="let cat of categorias" [value]="cat">
               {{ cat }}
             </mat-option>
           </mat-select>
-     </mat-form-field>
-    </form>
-  </div>
+        </mat-form-field>
 
-  <div class="boton-agregar-container">
-    <button class="btn-agregar" mat-raised-button  (click)="openDialog()" fontIcon="home">
-      <mat-icon>add</mat-icon>
-      Agregar Producto
-    </button>
-    <button class="shoppingcart" mat-raised-button color="accent" routerLink="/shoppingcart">
-      <mat-icon class="icon">shopping_cart</mat-icon>
-      Ver Carrito
-    </button>
-  </div>
+        <mat-form-field appearance="fill" class="filtro-categorias">
+          <mat-label>Buscar por nombre</mat-label>
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="value"
+            name="busquedaNombre"
+            (ngModelChange)="filtrarProductos()"
+          />
 
-</div>
+          <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''; filtrarProductos()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </div>
 
-<section *ngIf="productos.length > 0; else sinProductos">
-  <div class="producto-container"> 
-    <div *ngFor="let producto of productos" class="producto">
-        <app-product [Product]="producto" (eliminar)="eliminarProducto($event)" 
-        (editar)="openDialog(producto)"  
-        (agregarAlCarrito)="addToCart(producto)">></app-product>    
+    <div class="boton-agregar-container">
+      <button class="btn-agregar" mat-raised-button type="button" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+        Agregar Producto
+      </button>
+      <button class="shoppingcart" mat-raised-button color="accent" routerLink="/shoppingcart">
+        <mat-icon class="icon">shopping_cart</mat-icon>
+        Ver Carrito
+      </button>
     </div>
   </div>
-</section>
+
+  <section *ngIf="productos.length > 0; else sinProductos">
+    <div class="producto-container">
+      <div *ngFor="let producto of productos" class="producto">
+        <app-product
+          [Product]="producto"
+          (eliminar)="eliminarProducto($event)"
+          (editar)="openDialog(producto)"
+          (agregarAlCarrito)="addToCart(producto)">
+        </app-product>
+      </div>
+    </div>
+  </section>
+</ng-container>
+
+<ng-template #loginRedirect>
+  <p>Debes iniciar sesión para ver los productos.</p>
+</ng-template>
 
 
 <ng-template #sinProductos>
