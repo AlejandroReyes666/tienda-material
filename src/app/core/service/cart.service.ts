@@ -92,9 +92,10 @@ export class CartService {
   }
 
   getTotalPrice(): number {
-    return this.cartItems.reduce(
-      (total, item) => total + item.product.precio * item.quantity,
-      0
-    );
-  }
+  const items = this.cartItemsSubject.getValue();
+  return items.reduce(
+    (total, item) => total + item.product.precio * item.quantity,
+    0
+  );
+}
 }

@@ -14,5 +14,7 @@
 
 <div class="cart-total">
   <p>Total: ${{ getTotalPrice() }}</p>
-  <button mat-raised-button color="accent" (click)="clearCart()">Vaciar carrito</button>
+  <button class="remove-shoppingcart" mat-raised-button color="accent" (click)="clearCart()">
+     <mat-icon>remove_shopping_cart</mat-icon>
+  </button>
 </div>

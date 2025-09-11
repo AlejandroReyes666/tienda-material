@@ -1,6 +1,4 @@
 .example-form {
-  min-width: 150px;
-  max-width: 500px;
   width: 100%;
 }
 
@@ -8,25 +6,62 @@
   width: 100%;
 }
 
+.filtros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  align-items: end;
+}
 
 
 .boton-agregar-container {
   display: flex;
-  justify-content: center;
+  gap: 1rem;
+  justify-content: flex-start;
+  flex-wrap: wrap
 }
 
 .filtro-contenedor {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  margin: 2rem 0;
-  flex-wrap: wrap;
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem auto;
+  max-width: 1100px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .filtro-categorias {
   min-width: 250px;
   color: #303F9F;
+}
+
+.shoppingcart {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #3F51B5 !important;
+  color: white !important;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 1000;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.shoppingcart:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+.shoppingcart mat-icon {
+  font-size: 20px;
+  width: 32px;
+  height: 32px;
 }
 
 ::ng-deep mat-option:hover {
@@ -43,7 +78,7 @@
 }
 
 
-::ng-deep .btn-agregar,.shoppingcart {
+::ng-deep .btn-agregar{
   background-color: #3F51B5 !important; // azul principal
   color: white !important;
   border-radius: 25px;
@@ -63,3 +98,10 @@
   }
 }
 
+
+.filtros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  align-items: end;
+}

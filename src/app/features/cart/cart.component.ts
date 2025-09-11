@@ -5,10 +5,11 @@ import { Producto } from '../../core/models/ProductosModel';
 import { ProductComponent } from '../../shared/product/product/product.component';
 import { Observable } from 'rxjs';
 import { CartItem } from '../../core/models/cartItemsModel';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule, ProductComponent],
+  imports: [CommonModule, ProductComponent, MatIconModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })

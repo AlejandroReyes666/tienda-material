@@ -43,6 +43,7 @@ export class ProductsComponent implements OnInit,OnDestroy{
   value = '';
   precioMinimo: number=0;
   precioMaximo: number=Infinity;
+  isAdmin: boolean = false;
 
 
   constructor(private serviceProducto:ProductoServiceService,
@@ -224,6 +225,9 @@ private _filter(value: string): string[] {
   ngOnInit(): void {
     this.obtenerProductos();
     this.obtenerCategorias();
+    this.authService.role$.subscribe((role) => {
+      this.isAdmin = role === 'administrador';
+    });
   
   }
 
