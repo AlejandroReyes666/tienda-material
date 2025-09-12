@@ -6,10 +6,11 @@ import { ProductComponent } from '../../shared/product/product/product.component
 import { Observable } from 'rxjs';
 import { CartItem } from '../../core/models/cartItemsModel';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule, ProductComponent, MatIconModule],
+  imports: [CommonModule, ProductComponent, MatIconModule, MatCardModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })

@@ -25,6 +25,7 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   padding: 16px;
   overflow: hidden;
+  align-items: center;
 }
 
 .cantidad {
@@ -59,32 +60,50 @@
   border-radius: 8px;
 }
 
+.boton-agregar-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  flex-wrap: wrap
+}
 
-.remove-shoppingcart{
+.remove-shoppingcart {
   position: fixed;
+  background-color: #F44336;
+  color: white;
   bottom: 20px;
   right: 20px;
-  background-color: #3F51B5 !important;
-  color: white !important;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   z-index: 1000;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 25px;
+  border-radius: 60%;
 }
+
+/* deja al ícono respirar */
+.remove-shoppingcart mat-icon {
+  font-size: 24px; 
+  line-height: 24px;
+}
+
 
 .remove-shoppingcart:hover {
   transform: scale(1.1);
   box-shadow: 0 6px 16px rgba(0,0,0,0.4);
 }
 
-.remove-shoppingcart mat-icon {
-  font-size: 20px;
-  width: 32px;
-  height: 32px;
+
+.cart-total-card {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  width: 250px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  font-weight: bold;
+  color: #3F51B5;
+  
+}
+
+
+.total-card button:hover {
+  background-color: #1b5e20;
 }

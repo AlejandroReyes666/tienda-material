@@ -13,8 +13,16 @@
 
 
 <div class="cart-total">
-  <p>Total: ${{ getTotalPrice() }}</p>
-  <button class="remove-shoppingcart" mat-raised-button color="accent" (click)="clearCart()">
-     <mat-icon>remove_shopping_cart</mat-icon>
+  <mat-card class="cart-total-card">
+  <mat-card-title>Total a pagar</mat-card-title>
+  <mat-card-content>
+    <h2>${{ getTotalPrice() }}</h2>
+    <button mat-raised-button color="primary">Finalizar compra</button>
+  </mat-card-content>
+</mat-card>
+  <div class="boton-agregar-container">
+    <button mat-fab color="primary" class="remove-shoppingcart" (click)="clearCart()">
+      <mat-icon>remove_shopping_cart</mat-icon>
   </button>
+  </div>
 </div>
