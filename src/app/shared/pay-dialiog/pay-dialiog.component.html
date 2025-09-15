@@ -1,0 +1,14 @@
+<div class="title">
+  <h2 mat-dialog-title class="modal-header">
+    Confirmar Pago
+  </h2>
+</div>
+
+<div mat-dialog-content style="margin-bottom: 16px;">
+    Desea realizar el pago : {{ getTotalPrice() | currency:'USD' }}
+</div>
+<div class="actions" mat-dialog-actions align="end">
+  <button mat-button type="button" class="btn-pagar text-white px-4 py-2 rounded" 
+  (click)="confirmPayment()" mat-dialog-close>Pagar</button>
+  <button mat-button class="btn-eliminar text-white px-4 py-2 rounded" color="warn" (click)="cancel()">Cancelar</button>
+</div>
