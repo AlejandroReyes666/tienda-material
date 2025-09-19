@@ -1,14 +1,32 @@
-<div class="title">
-  <h2 mat-dialog-title class="modal-header">
-    Confirmar Pago
-  </h2>
-</div>
+<div class="pay-dialog-container" mat-dialog-content>
 
-<div mat-dialog-content style="margin-bottom: 16px;">
-    Desea realizar el pago : {{ getTotalPrice() | currency:'USD' }}
-</div>
-<div class="actions" mat-dialog-actions align="end">
-  <button mat-button type="button" class="btn-pagar text-white px-4 py-2 rounded" 
-  (click)="confirmPayment()" mat-dialog-close>Pagar</button>
-  <button mat-button class="btn-eliminar text-white px-4 py-2 rounded" color="warn" (click)="cancel()">Cancelar</button>
+  <div class="title">
+    <h2 mat-dialog-title class="modal-header">
+      Confirmar Pago
+    </h2>
+  </div>
+
+  <div mat-dialog-content class="dialog-total">
+      Desea realizar el pago:
+      <div class="total-valor">
+        {{ getTotalPrice() | currency:'USD' }}  
+      </div>
+      
+      <div class="info">
+        <p>Al confirmar, se procesará el pago y se finalizará la compra.</p>
+      </div>
+
+      <div class="resumen-productos" *ngFor="let item of cartItems$ | async">
+        <div>{{ item.product.nombre }} x{{ item.quantity }} - ${{ item.product.precio * item.quantity }}</div>
+      </div>
+  </div>
+
+
+  <div class="actions" mat-dialog-actions align="end">
+    <button mat-button type="button" class="btn-pagar" aria-label="Confirmar pago" 
+    (click)="confirmPayment()" mat-dialog-close>Pagar</button>
+
+    <button mat-button class="btn-eliminar" aria-label="Cancelar pago" 
+      (click)="cancel()">Cancelar</button>
+  </div>
 </div>

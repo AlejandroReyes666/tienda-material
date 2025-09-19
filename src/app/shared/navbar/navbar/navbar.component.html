@@ -13,7 +13,7 @@
     <a mat-menu-item routerLink="/workwithus" routerLinkActive="actived">Trabaja con Nosotros</a>
   </mat-menu>
 
-  <!-- 👇 Aquí la parte dinámica -->
+  <!-- Aquí la parte dinámica -->
   <ng-container   *ngIf="isLoggedIn; else showLogin">
     <!-- Si está logueado -->
     <button mat-button [matMenuTriggerFor]="userMenu">

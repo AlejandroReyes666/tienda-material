@@ -100,10 +100,43 @@
   border-radius: 8px;
   font-weight: bold;
   color: #3F51B5;
+  background: white;     /* Fondo sólido */
+  z-index: 1100; /* Asegura que esté por encima de otros elementos */
   
 }
+.cart-total-card h2 {
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+ 
 
+.cart-total-card mat-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-.total-card button:hover {
-  background-color: #1b5e20;
+.btn-finalizar {
+  background-color: #3F51B5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+
+.btn-finalizar:hover {
+  background-color: #2e7d32;
+}
+
+@media (max-width: 480px) {
+  .cart-total-card {
+    left: 50%;
+    bottom: 80px;
+    transform: translateX(-50%);
+    width: 90%;
+  }
 }

@@ -1,7 +1,9 @@
 import { Component, Inject,} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogRef,MatDialogActions,MatDialogContent,MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CartComponent } from '../../features/cart/cart.component';
+import { CartService } from '../../core/service/cart.service';
+import { Observable } from 'rxjs';
+import { CartItem } from '../../core/models/cartItemsModel';
 
 @Component({
   selector: 'app-pay-dialiog',
@@ -11,9 +13,13 @@ import { CartComponent } from '../../features/cart/cart.component';
   styleUrl: './pay-dialiog.component.scss'
 })
 export class PayDialiogComponent {
+
+  cartItems$!: Observable<CartItem[]>;
   constructor(
     private payDialogRef: MatDialogRef<PayDialiogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { Total: number }
+    @Inject(MAT_DIALOG_DATA) public data: { Total: number },
+    private cartService: CartService
+
 
     ){}
 
@@ -27,6 +33,16 @@ export class PayDialiogComponent {
   getTotalPrice(): number {
   return this.data.Total;
 }
+
+getitems():Observable<CartItem[]>{
+  console.log("los productos en el carrilto son" + this.cartService.cartItems$);
+  return this.cartService.cartItems$;
+}
+
+ngOnInit(): void {
+  this.cartItems$ = this.getitems();
+}
+
 
 
 
