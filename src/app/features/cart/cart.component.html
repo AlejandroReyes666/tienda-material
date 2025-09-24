@@ -1,30 +1,32 @@
-<div class="producto-container">
-  <div *ngFor="let item of cartItems$ | async" class="producto">
-    <div class="producto-card-wrapper">
-      <app-product [Product]="item.product"></app-product>
-      <div></div>
-      <div class="cantidad">x{{ item.quantity }}</div>
-      <div class="acciones">
-        <div class="subtotal">Subtotal: ${{ item.product.precio * item.quantity }}</div>
+<div class="cart-container">
+  <div class="producto-container">
+    <div *ngFor="let item of cartItems$ | async" class="producto">
+      <div class="producto-card-wrapper">
+        <app-product [Product]="item.product"></app-product>
+        <div class="cantidad">x{{ item.quantity }}</div>
+        <div class="acciones">
+          <div class="subtotal">Subtotal: ${{ item.product.precio * item.quantity }}</div>
+        </div>
       </div>
+    </div>
+  </div>
+
+  <div class="cart-total">
+    <mat-card class="cart-total-card">
+      <mat-card-title>Total a pagar</mat-card-title>
+      <mat-card-content>
+        <h2>${{ getTotalPrice() }}</h2>
+        <button class="btn-finalizar" [disabled]="(cartEmpty$ | async)" (click)="openPayDialog()">
+          Finalizar compra
+        </button>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="boton-agregar-container">
+      <button mat-fab color="primary" class="remove-shoppingcart" [disabled]="(cartEmpty$ | async)" (click)="clearCart()">
+        <mat-icon>remove_shopping_cart</mat-icon>
+      </button>
     </div>
   </div>
 </div>
 
-
-<div class="cart-total">
-  <mat-card class="cart-total-card">
-  <mat-card-title>Total a pagar</mat-card-title>
-  <mat-card-content>
-    <h2>${{ getTotalPrice() }}</h2>
-    <button class="btn-finalizar" (click)="openPayDialog()">
-      Finalizar compra
-    </button>
-  </mat-card-content>
-</mat-card>
-  <div class="boton-agregar-container">
-    <button mat-fab color="primary" class="remove-shoppingcart" (click)="clearCart()">
-      <mat-icon>remove_shopping_cart</mat-icon>
-  </button>
-  </div>
-</div>
