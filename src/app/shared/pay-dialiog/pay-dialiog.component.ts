@@ -4,6 +4,9 @@ import { MatDialogRef,MatDialogActions,MatDialogContent,MAT_DIALOG_DATA } from '
 import { CartService } from '../../core/service/cart.service';
 import { Observable } from 'rxjs';
 import { CartItem } from '../../core/models/cartItemsModel';
+import { Order } from '../../core/models/orderModel';
+import { OrderService } from '../../core/service/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pay-dialiog',
@@ -15,33 +18,45 @@ import { CartItem } from '../../core/models/cartItemsModel';
 export class PayDialiogComponent {
 
   cartItems$!: Observable<CartItem[]>;
+  
   constructor(
     private payDialogRef: MatDialogRef<PayDialiogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { Total: number },
-    private cartService: CartService
-
-
+    private cartService: CartService,
+    private orderService: OrderService,
+    private router: Router
     ){}
 
   confirmPayment(){
-    this.payDialogRef.close(true);
+    const items = this.cartService.getCartItems();
+    const total = this.getTotalPrice();
+    this.cartService.clearCart();
+    this.payDialogRef.close({items, total});
+    this.router.navigate(['/confirmPurshase']);
+    this.orderService.confirmOrder(items, total);
+
   }
+
   cancel() {
     this.payDialogRef.close(false);
   }
 
   getTotalPrice(): number {
-  return this.data.Total;
-}
+    return this.data.Total;
+  }
 
-getitems():Observable<CartItem[]>{
-  console.log("los productos en el carrilto son" + this.cartService.cartItems$);
-  return this.cartService.cartItems$;
-}
+  getitems():Observable<CartItem[]>{
+   console.log("los productos en el carrilto son" + this.cartService.cartItems$);
+   return this.cartService.cartItems$;
+  }
 
-ngOnInit(): void {
-  this.cartItems$ = this.getitems();
-}
+ 
+
+
+
+  ngOnInit(): void {
+    this.cartItems$ = this.getitems();
+  }
 
 
 

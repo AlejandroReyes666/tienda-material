@@ -8,6 +8,7 @@ import { WorkWithUsComponent } from './features/work-with-us/work-with-us.compon
 import { SalesComponent } from './features/sales/sales.component';
 import { CartComponent } from './features/cart/cart.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { ConfirmPurshasesComponent } from './features/confirm-purshases/confirm-purshases.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -18,6 +19,7 @@ export const routes: Routes = [
     {path:'aboutus', component:AboutUsComponent},
     {path:'sales', component: SalesComponent}, // Asegúrate de importar SalesComponent en tu módulo
     {path:'shoppingcart',component:CartComponent},
+    {path:'confirmPurshase',component:ConfirmPurshasesComponent},
     { path: '**', redirectTo: '' } // redirecciona a Inicio si no encuentra ruta
 
 
