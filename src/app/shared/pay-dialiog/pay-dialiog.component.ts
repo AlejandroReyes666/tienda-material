@@ -30,7 +30,6 @@ export class PayDialiogComponent {
   confirmPayment(){
     const items = this.cartService.getCartItems();
     const total = this.getTotalPrice();
-    this.cartService.clearCart();
     this.payDialogRef.close({items, total});
     this.router.navigate(['/confirmPurshase']);
     this.orderService.confirmOrder(items, total);

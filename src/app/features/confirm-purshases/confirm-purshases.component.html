@@ -1,4 +1,4 @@
-<div class="confirmation-container">
+<div class="confirmation-container" *ngIf="order">
   <div class="confirmation-header">¡Gracias por tu compra!</div>
 
   <div class="order-details">
@@ -15,6 +15,6 @@
   </ul>
 
   <div class="actions">
-    <button routerLink="/productos">🛒 Ver más productos</button>
+    <button (click)="goToProducts()">🛒 Ver más productos</button>
   </div>
 </div>

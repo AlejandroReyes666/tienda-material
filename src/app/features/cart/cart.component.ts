@@ -25,6 +25,8 @@ export class CartComponent implements OnInit {
   totalPrice: number = 0;
   cartEmpty$: Observable<boolean>;
   private dialogOpened = false;
+  private fromPayment = false;
+  isProcessing = false;
 
   constructor(
     private cartService: CartService,
@@ -51,12 +53,15 @@ export class CartComponent implements OnInit {
   }
 
   openPayDialog(): void {
+    this.isProcessing=true;
     const dialogRef = this.payDialog.open(PayDialiogComponent, {
       width: '400px',
       data: { Total: this.getTotalPrice()||null }
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.isProcessing=false;
       if (result) {
+        this.fromPayment = true;
         this.clearCart();
       }});
   }
@@ -67,19 +72,23 @@ export class CartComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'shop') {
-        // Aquí puedes redirigir al usuario a la tienda o realizar otra acción  
-        // Por ejemplo, si estás usando Angular Router:
         this.router.navigate(['/products']);
       } 
     });
   }
 
   ngOnInit(): void {
-    this.cartEmpty$.subscribe(isEmpty => {
-      if (isEmpty) {
-        this.openEmptyCartDialog();
-        this.dialogOpened = true;
-      }});
+  this.cartEmpty$.subscribe(isEmpty => {
+    if (isEmpty && !this.fromPayment && !this.dialogOpened) {
+      this.openEmptyCartDialog();
+      this.dialogOpened = true;
     }
+
+    // ✅ Reiniciamos la bandera después de procesar
+    if (this.fromPayment ) {
+      this.fromPayment  = false;
+    }
+  });
+}
 
 }

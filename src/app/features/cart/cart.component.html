@@ -16,7 +16,7 @@
       <mat-card-title>Total a pagar</mat-card-title>
       <mat-card-content>
         <h2>${{ getTotalPrice() }}</h2>
-        <button class="btn-finalizar" [disabled]="(cartEmpty$ | async)" (click)="openPayDialog()">
+        <button [disabled]="isProcessing" class="btn-finalizar" [disabled]="(cartEmpty$ | async)" (click)="openPayDialog()">
           Finalizar compra
         </button>
       </mat-card-content>
