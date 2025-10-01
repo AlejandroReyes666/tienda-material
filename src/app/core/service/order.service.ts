@@ -54,6 +54,10 @@ export class OrderService {
   getOrdersByuser(userId: string): Order[] {
     return this.orders.filter(order => order.userId === userId);
   }
+  
+  getOrdersByUserFromApi(userId: string): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.apiUrl}?userId=${userId}`);
+  }
 
  
 

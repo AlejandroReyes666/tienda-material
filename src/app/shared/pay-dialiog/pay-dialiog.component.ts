@@ -31,6 +31,7 @@ export class PayDialiogComponent {
 
   confirmPayment(){
     const items = this.cartService.getCartItems();
+    console.log("los productos en el carrilto son" + items);
     const total = this.getTotalPrice();
     const userId= this.authService.userId;
     this.payDialogRef.close({items, total});

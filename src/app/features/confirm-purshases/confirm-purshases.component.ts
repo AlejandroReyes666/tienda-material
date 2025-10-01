@@ -30,6 +30,10 @@ export class ConfirmPurshasesComponent implements OnInit {
     this.router.navigate(['/products']);
   }
 
+  goToOrderHistory(): void {
+    this.router.navigate(['/orderHistory']);
+  }
+
  ngOnInit(): void {
     const orders = this.orderService.getOrders();
     this.order = orders[orders.length - 1]; // Última orden realizada
