@@ -17,7 +17,7 @@
   <ng-container   *ngIf="isLoggedIn; else showLogin">
     <!-- Si está logueado -->
     <button mat-button [matMenuTriggerFor]="userMenu">
-      {{ currentRole || 'Usuario' }}
+      {{ username || 'Usuario' }}
     </button>
     <mat-menu #userMenu="matMenu">
       <button mat-menu-item (click)="handleAuthAction()">Cerrar sesión</button>

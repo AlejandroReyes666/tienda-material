@@ -11,18 +11,33 @@ import { Observable } from 'rxjs';
 export class OrderService {
   private orders: Order[] = [];
   private apiUrl = 'http://localhost:3000/ventas';
+  
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  confirmOrder(cartItems: CartItem[], total: number): void {
+  confirmOrder(cartItems: CartItem[], total: number,userId:any): void {
     const newOrder: Order = {
       id: this.generateOrderId(),
       items: cartItems,
       total: total,
       date: new Date(),
-      //userId: 
+      userId:userId 
     }
+
     this.saveOrder(newOrder);
+    this.saveOrderToApi(newOrder).subscribe({
+      next: (order) => {
+        console.log('Order saved to API:', order);
+      },
+      error: (error) => {
+        console.error('Error saving order to API:', error);
+      }
+    });
+
+
+
     console.log('Order confirmed:', newOrder);
 
 
@@ -36,11 +51,19 @@ export class OrderService {
     return this.orders;
   }
 
-  /*getOrdersByuser(userId: string): Order[] {
+  getOrdersByuser(userId: string): Order[] {
     return this.orders.filter(order => order.userId === userId);
-  }*/
+  }
+
+ 
+
+
 
   saveOrder(order: Order): void {
     this.orders.push(order);
+  }
+
+  saveOrderToApi(order: Order): Observable<Order> {
+    return this.http.post<Order>(this.apiUrl, order);
   }
 }

@@ -30,6 +30,10 @@ export class NavbarComponent {
     return this.AuthService.CurrentRole;
   }
 
+  get username(): string | null {
+    return this.AuthService.username;
+  }
+
   handleAuthAction() {
     if (this.isLoggedIn) {
       this.AuthService.loggedOut();

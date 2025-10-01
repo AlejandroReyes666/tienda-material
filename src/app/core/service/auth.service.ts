@@ -54,4 +54,18 @@ export class AuthService {
   get IsLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
+
+  get username(): string | null {
+    return localStorage.getItem('username');
+  }
+
+  get userId(): string | null {
+  const user = localStorage.getItem('user');
+  if (!user) return null;
+  try {
+    return JSON.parse(user).id;
+  } catch {
+    return null;
+  }
+}
 }

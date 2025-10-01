@@ -81,6 +81,7 @@ export class LoginComponent implements OnInit {
         if (response) {
 
           this.authService.loggedSuccess(response[0].rol, response[0].token??'');
+          //localStorage.setItem('username', response[0].userId ?? '');
           
           this.snakbar.open('Inicio de sesión exitoso', 'Cerrar', {
             duration: 3000,

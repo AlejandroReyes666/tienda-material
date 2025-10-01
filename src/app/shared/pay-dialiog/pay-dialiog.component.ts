@@ -7,6 +7,7 @@ import { CartItem } from '../../core/models/cartItemsModel';
 import { Order } from '../../core/models/orderModel';
 import { OrderService } from '../../core/service/order.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../core/service/auth.service';
 
 @Component({
   selector: 'app-pay-dialiog',
@@ -24,15 +25,17 @@ export class PayDialiogComponent {
     @Inject(MAT_DIALOG_DATA) public data: { Total: number },
     private cartService: CartService,
     private orderService: OrderService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
     ){}
 
   confirmPayment(){
     const items = this.cartService.getCartItems();
     const total = this.getTotalPrice();
+    const userId= this.authService.userId;
     this.payDialogRef.close({items, total});
     this.router.navigate(['/confirmPurshase']);
-    this.orderService.confirmOrder(items, total);
+    this.orderService.confirmOrder(items, total, userId);
 
   }
 
