@@ -26,6 +26,8 @@ export class OrderService {
       userId:userId 
     }
 
+    console.log("los  items en el confirm order de la orden son ",newOrder.items)
+
     this.saveOrder(newOrder);
     this.saveOrderToApi(newOrder).subscribe({
       next: (order) => {

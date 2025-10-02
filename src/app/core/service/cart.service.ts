@@ -88,7 +88,7 @@ export class CartService {
   }
 
   getCartItems(): CartItem[] {
-    console.log("los productos en el carrilto son  ejecutado el servicio" + this.cartItems);
+    console.log("los productos en el carrilto son  ejecutado el servicio", this.cartItems);
     return [...this.cartItems];
   }
 
