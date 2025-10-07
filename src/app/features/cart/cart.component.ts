@@ -36,7 +36,7 @@ export class CartComponent implements OnInit {
   ) {
     
      this.cartItems$ = this.cartService.cartItems$;
-     this.cartEmpty$ = this.cartItems$.pipe( // ✅ Inicialización
+     this.cartEmpty$ = this.cartItems$.pipe( 
       map(items => items.length === 0));
   }
 

@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class OrderService {
   private orders: Order[] = [];
   private apiUrl = 'http://localhost:3000/ventas';
+  cartItems$?: Observable<CartItem[]>;
   
 
   constructor(
@@ -18,9 +19,10 @@ export class OrderService {
   ) { }
 
   confirmOrder(cartItems: CartItem[], total: number,userId:any): void {
+    
     const newOrder: Order = {
       id: this.generateOrderId(),
-      items: cartItems,
+      items: [...cartItems],
       total: total,
       date: new Date(),
       userId:userId 

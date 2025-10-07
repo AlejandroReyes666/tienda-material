@@ -29,16 +29,22 @@ export class PayDialiogComponent {
     private authService: AuthService
     ){}
 
-  confirmPayment(){
-    const items = this.cartService.getCartItems();
-    console.log("los productos en el carrilto son" + items);
+ confirmPayment() {
+  this.cartItems$.subscribe(items => {
     const total = this.getTotalPrice();
-    const userId= this.authService.userId;
-    this.payDialogRef.close({items, total});
-    this.router.navigate(['/confirmPurshase']);
-    this.orderService.confirmOrder(items, total, userId);
+    const userId = this.authService.userId;
 
-  }
+    // Clonamos los items para evitar mutaciones
+    const clonedItems = [...items];
+
+    // Guardamos la orden
+    this.orderService.confirmOrder(clonedItems, total, userId);
+
+    // Cerramos el diálogo y navegamos
+    this.payDialogRef.close({ items: clonedItems, total });
+    this.router.navigate(['/confirmPurshase']);
+  });
+}
 
   cancel() {
     this.payDialogRef.close(false);

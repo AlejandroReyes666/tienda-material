@@ -21,9 +21,10 @@ export class ConfirmPurshasesComponent implements OnInit {
     private router: Router
   ) { }
 
-  getorder(): Order {
-    const orders = this.orderService.getOrders();
-    return orders[orders.length - 1]; // Devuelve la última orden realizada
+  getorder(userId: string): void {
+    this.orderService.getOrdersByUserFromApi(userId).subscribe((orders: Order[]) => {
+      this.order = orders[orders.length - 1]; // Devuelve la última orden realizada
+    });
   }
 
   goToProducts(): void {
