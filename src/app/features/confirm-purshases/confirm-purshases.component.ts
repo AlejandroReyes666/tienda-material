@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Order } from '../../core/models/orderModel';
 import { OrderService } from '../../core/service/order.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../core/service/auth.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class ConfirmPurshasesComponent implements OnInit {
   order!: Order;
   constructor(
     private orderService: OrderService,
+    private authService: AuthService,
     private router: Router
   ) { }
 
@@ -36,8 +38,15 @@ export class ConfirmPurshasesComponent implements OnInit {
   }
 
  ngOnInit(): void {
-    const orders = this.orderService.getOrders();
-    this.order = orders[orders.length - 1]; // Última orden realizada
+    const userId=this.authService.userId;
+    if(userId){
+      this.getorder(userId);
+      
+    }
+    else{
+      console.warn("nop se encontro el usuario")
+    }
+
   }
 
 }

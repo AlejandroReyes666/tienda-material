@@ -17,18 +17,23 @@ export class OrderHistoryComponent implements OnInit {
   constructor(private orderService: OrderService, private authService: AuthService) { }
 
   getOrders() {
+    console.log("ejeutando el llamado de get orders");
     const userId = this.authService.userId;
+    console.log("el id del usuario es: ", userId);
     if (userId) {
+      console.log(" ");
       this.orderService.getOrdersByUserFromApi(userId).subscribe({
         next: (orders) => {
           this.orders = orders;
           console.log('Orders fetched from API:', orders);
+          console.log('tamaño de array', orders.length);
         },
         error: (error) => {
           console.error('Error fetching orders from API:', error);
         }
       });
     }
+    
   }
 
   ngOnInit(): void {

@@ -8,6 +8,7 @@ import { Order } from '../../core/models/orderModel';
 import { OrderService } from '../../core/service/order.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/service/auth.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-pay-dialiog',
@@ -30,7 +31,7 @@ export class PayDialiogComponent {
     ){}
 
  confirmPayment() {
-  this.cartItems$.subscribe(items => {
+  this.cartItems$.pipe(take(1)).subscribe(items => {
     const total = this.getTotalPrice();
     const userId = this.authService.userId;
 

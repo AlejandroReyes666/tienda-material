@@ -30,7 +30,7 @@ export class OrderService {
 
     console.log("los  items en el confirm order de la orden son ",newOrder.items)
 
-    this.saveOrder(newOrder);
+    //this.saveOrder(newOrder);
     this.saveOrderToApi(newOrder).subscribe({
       next: (order) => {
         console.log('Order saved to API:', order);
@@ -62,10 +62,6 @@ export class OrderService {
   getOrdersByUserFromApi(userId: string): Observable<Order[]> {
     return this.http.get<Order[]>(`${this.apiUrl}?userId=${userId}`);
   }
-
- 
-
-
 
   saveOrder(order: Order): void {
     this.orders.push(order);
