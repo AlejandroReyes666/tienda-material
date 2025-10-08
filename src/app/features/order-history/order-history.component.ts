@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { OrderService } from '../../core/service/order.service';
 import { AuthService } from '../../core/service/auth.service';
 import { Order } from '../../core/models/orderModel';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-order-history',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIcon],
   templateUrl: './order-history.component.html',
   styleUrl: './order-history.component.scss'
 })

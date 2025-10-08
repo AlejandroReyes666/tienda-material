@@ -27,6 +27,8 @@ export class CartComponent implements OnInit {
   private dialogOpened = false;
   private fromPayment = false;
   isProcessing = false;
+  private fromLogout = false;
+
 
   constructor(
     private cartService: CartService,
@@ -54,14 +56,17 @@ export class CartComponent implements OnInit {
 
   openPayDialog(): void {
     this.isProcessing=true;
+    this.fromLogout=true;
     const dialogRef = this.payDialog.open(PayDialiogComponent, {
       width: '400px',
       data: { Total: this.getTotalPrice()||null }
     });
     dialogRef.afterClosed().subscribe(result => {
       this.isProcessing=false;
+      this.fromLogout=false;
       if (result) {
         this.fromPayment = true;
+        this.fromLogout=true
         this.clearCart();
       }});
   }
@@ -79,7 +84,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
   this.cartEmpty$.subscribe(isEmpty => {
-    if (isEmpty && !this.fromPayment && !this.dialogOpened) {
+    if (isEmpty && !this.fromPayment && !this.dialogOpened && !this.fromLogout) {
       this.openEmptyCartDialog();
       this.dialogOpened = true;
     }
@@ -87,6 +92,7 @@ export class CartComponent implements OnInit {
     // ✅ Reiniciamos la bandera después de procesar
     if (this.fromPayment ) {
       this.fromPayment  = false;
+      this.fromLogout=false;
     }
   });
 }
