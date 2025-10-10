@@ -6,6 +6,10 @@ import {MatMenuModule} from '@angular/material/menu';
 import { AuthService } from '../../../core/service/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { MatSidenav } from '@angular/material/sidenav';
+import { ViewChild } from '@angular/core';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 
 @Component({
@@ -13,11 +17,14 @@ import { CommonModule } from '@angular/common';
   imports: [RouterModule,
     MatToolbarModule,
     MatButtonModule,
-    MatMenuModule,CommonModule],
+    MatMenuModule,CommonModule,MatIcon,MatSidenav,MatSidenavModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+
   constructor(private AuthService: AuthService,
               private router: Router
   ) { }
@@ -42,3 +49,5 @@ export class NavbarComponent {
   }
 
 }
+
+
