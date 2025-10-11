@@ -10,6 +10,9 @@ import { MatIcon } from '@angular/material/icon';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ViewChild } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import{MatNavList} from '@angular/material/list';
+import { ChangeDetectorRef } from '@angular/core';
 
 
 @Component({
@@ -17,17 +20,28 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   imports: [RouterModule,
     MatToolbarModule,
     MatButtonModule,
-    MatMenuModule,CommonModule,MatIcon,MatSidenav,MatSidenavModule],
+    MatMenuModule, CommonModule, MatIcon, MatSidenav, MatSidenavModule, MatNavList],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
+  isMobile: boolean = false;
+  contactExpanded = false;
 
   constructor(private AuthService: AuthService,
-              private router: Router
-  ) { }
+              private router: Router,
+              private breakpointObserver: BreakpointObserver,
+              private cdr: ChangeDetectorRef
+  ) { 
+    this.breakpointObserver.observe([Breakpoints.Handset])
+      .subscribe(result => {
+        this.isMobile = result.matches;
+        console.log('isMobile:', this.isMobile);
+        this.cdr.detectChanges();
+      });
+  }
 
   get isLoggedIn() {
     return this.AuthService.IsLoggedIn;
@@ -46,6 +60,13 @@ export class NavbarComponent {
       this.AuthService.loggedOut();
       this.router.navigate(['/login']);
     }
+  }
+
+
+  
+
+  toggleContactMenu() {
+    this.contactExpanded = !this.contactExpanded;    
   }
 
 }

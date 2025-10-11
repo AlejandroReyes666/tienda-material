@@ -87,31 +87,17 @@ mat-icon {
 }
 
 /* Responsive para mobile y tablets */
-@media (max-width: 768px) {
-  .desktop-menu {
-    display: none;
-  }
+.menu-button {
+  display: inline-flex !important;
+  background-color: transparent;
+  border: none;
+  color: white;
+  z-index: 2000;
+}
 
+@media (max-width: 768px) {
   .menu-button {
     display: inline-flex;
     color:white;
-  }
-
-  .navbar {
-    height: 56px;
-  }
-
-  .main-content {
-    margin-top: 56px;
-  }
-
-  .mobile-menu {
-    width: 250px;
-    padding: 16px;
-  }
-
-  a[mat-list-item] {
-    font-size: 14px;
-    padding: 12px 0;
   }
 }

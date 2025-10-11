@@ -1,41 +1,59 @@
 <mat-sidenav-container class="sidenav-container">
-  <!-- Menú lateral para mobile -->
-  <mat-sidenav #sidenav mode="over" class="mobile-menu">
-  <a mat-list-item routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-    <mat-icon>home</mat-icon>
-    <span>Inicio</span>
-  </a>
+  <!-- Menú lateral solo si es mobile -->
+  <mat-sidenav *ngIf="isMobile" #sidenav mode="over" class="mobile-menu">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>home</mat-icon>
+        <span>Inicio</span>
+      </a>
 
-  <a mat-list-item routerLink="/products" routerLinkActive="active-link">
-    <mat-icon>shopping_bag</mat-icon>
-    <span>Productos</span>
-  </a>
+      <a mat-list-item routerLink="/products" routerLinkActive="active-link">
+        <mat-icon>shopping_bag</mat-icon>
+        <span>Productos</span>
+      </a>
 
-  <a mat-list-item routerLink="/aboutus" routerLinkActive="active-link">
-    <mat-icon>info</mat-icon>
-    <span>Conócenos</span>
-  </a>
+      <a mat-list-item routerLink="/aboutus" routerLinkActive="active-link">
+        <mat-icon>info</mat-icon>
+        <span>Conócenos</span>
+      </a>
 
-  <a mat-list-item routerLink="/contact" routerLinkActive="active-link">
-    <mat-icon>contact_mail</mat-icon>
-    <span>Contáctanos</span>
-  </a>
+      <a mat-list-item (click)="toggleContactMenu()">
+        <mat-icon>contact_mail</mat-icon>
+        <span>Contáctanos</span>
+        <mat-icon>{{ contactExpanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+      </a>
 
-  <a mat-list-item routerLink="/orderHistory" routerLinkActive="active-link">
-    <mat-icon>receipt_long</mat-icon>
-    <span>Mis compras</span>
-  </a>
+      <!-- Submenú desplegable -->
+      <mat-nav-list *ngIf="contactExpanded" class="submenu">
+        <a mat-list-item routerLink="/contact" routerLinkActive="active-link">
+          <mat-icon>support_agent</mat-icon>
+          <span>Atención al cliente</span>
+        </a>
 
-  <a mat-list-item (click)="handleAuthAction()">
-    <mat-icon>logout</mat-icon>
-    <span>Cerrar sesión</span>
-  </a>
-</mat-sidenav>
+        <a mat-list-item routerLink="/workwithus" routerLinkActive="active-link">
+          <mat-icon>work</mat-icon>
+          <span>Trabaja con Nosotros</span>
+        </a>
+      </mat-nav-list>
+      
+      <a mat-list-item routerLink="/orderHistory" routerLinkActive="active-link">
+        <mat-icon>receipt_long</mat-icon>
+        <span>Mis compras</span>
+      </a>
+
+      <a mat-list-item (click)="handleAuthAction()">
+        <mat-icon>logout</mat-icon>
+        <span>Cerrar sesión</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
 
   <!-- Navbar fijo -->
   <mat-toolbar color="primary" class="navbar">
-    <!-- Botón hamburguesa solo en mobile -->
-    <button mat-icon-button (click)="sidenav.toggle()" class="menu-button" aria-label="Abrir menú">
+    <!-- Botón hamburguesa solo si es mobile -->
+     <p style="color: white;">isMobile: {{ isMobile }}</p>
+     
+    <button  mat-icon-button (click)="sidenav.toggle()" class="menu-button" aria-label="Abrir menú">
       <mat-icon>menu</mat-icon>
     </button>
 
@@ -43,7 +61,8 @@
     <span class="spacer"></span>
 
     <!-- Menú horizontal solo en desktop -->
-    <div class="desktop-menu">
+    <div class="desktop-menu" *ngIf="!isMobile">
+      <!-- ...tus enlaces desktop -->
       <a mat-button routerLink="/" routerLinkActive="actived" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
       <a mat-button routerLink="/products" routerLinkActive="actived">Productos</a>
       <a mat-button routerLink="/aboutus" routerLinkActive="actived">Conócenos</a>
@@ -69,11 +88,11 @@
       <ng-template #showLogin>
         <a mat-button routerLink="/login">Login</a>
       </ng-template>
+  
     </div>
   </mat-toolbar>
 
-  <!-- Contenido principal -->
-<div class="main-content">
+  <div class="main-content">
     <router-outlet></router-outlet>
-  </div>  
+  </div>
 </mat-sidenav-container>
