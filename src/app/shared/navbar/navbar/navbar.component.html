@@ -51,10 +51,8 @@
   <!-- Navbar fijo -->
   <mat-toolbar color="primary" class="navbar">
     <!-- Botón hamburguesa solo si es mobile -->
-     <p style="color: white;">isMobile: {{ isMobile }}</p>
-     
     <button  mat-icon-button (click)="sidenav.toggle()" class="menu-button" aria-label="Abrir menú">
-      <mat-icon>menu</mat-icon>
+      <mat-icon   *ngIf="isMobile" class="menu-icon">menu</mat-icon> 
     </button>
 
     <span>Tiendas</span>

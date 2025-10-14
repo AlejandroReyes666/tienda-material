@@ -44,6 +44,7 @@
   right: 20px;
   z-index: 1000;
   border-radius: 60%;
+  
 }
 
 .shoppingcart:hover {
@@ -96,4 +97,31 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
   align-items: end;
+}
+
+
+.cart-label {
+  position: fixed;
+  bottom: 1px;
+  right: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: #303f9f;
+  background-color: white;
+  padding: -4px 8px;
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 999;
+
+   opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp 0.4s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

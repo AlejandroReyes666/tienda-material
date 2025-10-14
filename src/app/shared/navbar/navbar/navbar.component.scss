@@ -95,9 +95,26 @@ mat-icon {
   z-index: 2000;
 }
 
+.menu-icon {
+  font-size: 24px;
+  color: white;
+}
+
 @media (max-width: 768px) {
+
+  .mobile-menu {
+    margin-top: 64px;
+    height: calc(100vh - 64px);
+    overflow-y: auto;
+  }
   .menu-button {
     display: inline-flex;
     color:white;
   }
+
+  .desktop-menu {
+    display: none;
+  }
+
+  
 }

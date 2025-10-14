@@ -13,6 +13,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import{MatNavList} from '@angular/material/list';
 import { ChangeDetectorRef } from '@angular/core';
+import { NgZone } from '@angular/core';
+import { filter } from 'rxjs/operators';
+import { NavigationEnd } from '@angular/router';
 
 
 @Component({
@@ -33,15 +36,24 @@ export class NavbarComponent {
   constructor(private AuthService: AuthService,
               private router: Router,
               private breakpointObserver: BreakpointObserver,
-              private cdr: ChangeDetectorRef
-  ) { 
-    this.breakpointObserver.observe([Breakpoints.Handset])
-      .subscribe(result => {
+              private cdr: ChangeDetectorRef,
+              private ngZone: NgZone
+) {
+  this.breakpointObserver.observe([Breakpoints.Handset])
+    .subscribe(result => {
+      this.ngZone.run(() => {
         this.isMobile = result.matches;
-        console.log('isMobile:', this.isMobile);
-        this.cdr.detectChanges();
       });
-  }
+    });
+
+    this.router.events
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe(() => {
+      if (this.isMobile && this.sidenav?.opened) {
+        this.sidenav.close();
+      }
+    });
+}
 
   get isLoggedIn() {
     return this.AuthService.IsLoggedIn;
