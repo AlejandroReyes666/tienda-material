@@ -5,6 +5,12 @@ h2 {
   color: #1b5e20;
 }
 
+.title {
+  text-align: center !important;
+  margin-top: 60px !important;
+  margin-bottom: 16px !important;
+}
+
 p {
   font-size: 1rem;
   color: #666;
@@ -19,6 +25,8 @@ p {
   margin: 24px auto;
   max-width: 640px;
   transition: transform 0.2s ease;
+  animation: fadeIn 0.4s ease-out;
+  overflow: visible;
 }
 
 .order:hover {
@@ -37,7 +45,11 @@ p {
   color: #424242;
   margin: 6px 0;
 }
-✅
+
+.order p:first-of-type {
+  font-weight: 600;
+  color: #1b5e20;
+}
 
 .order-items {
   margin-top: 16px;
@@ -50,7 +62,6 @@ p {
   margin-bottom: 12px;
 }
 
-
 .order-items ul {
   list-style: none;
   padding: 0;
@@ -60,7 +71,7 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0;
+  padding: 12px 0;
   border-bottom: 1px dashed #ccc;
   font-size: 0.95rem;
   color: #555;
@@ -70,6 +81,65 @@ p {
   border-bottom: none;
 }
 
+.order-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  background-color: #e3f2fd;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.order-id,
+.order-date,
+.order-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+  color: #212121;
+  flex: 1 1 auto;
+  min-width: 140px;
+}
+
+.order-badge {
+  justify-content: center;
+  background-color: #c8e6c9;
+  color: #256029;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: transform 0.2s ease;
+}
+
+.order-badge:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 400px) {
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-id,
+  .order-date,
+  .order-badge {
+    font-size: 0.9rem;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .order-badge {
+    margin-top: 4px;
+    align-self: flex-start;
+  }
+}
+
+/* ✅ Animación global */
 @keyframes fadeIn {
   from {
     opacity: 0;

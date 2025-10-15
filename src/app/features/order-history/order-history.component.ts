@@ -4,11 +4,13 @@ import { OrderService } from '../../core/service/order.service';
 import { AuthService } from '../../core/service/auth.service';
 import { Order } from '../../core/models/orderModel';
 import { MatIcon } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 @Component({
   selector: 'app-order-history',
   standalone: true,
-  imports: [CommonModule, MatIcon],
+  imports: [CommonModule, MatIcon, MatExpansionModule],
   templateUrl: './order-history.component.html',
   styleUrl: './order-history.component.scss'
 })
