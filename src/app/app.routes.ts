@@ -19,8 +19,8 @@ export const routes: Routes = [
     {path:'aboutus', component:AboutUsComponent},
     {path:'sales', component: SalesComponent}, // Asegúrate de importar SalesComponent en tu módulo
     {path:'shoppingcart',component:CartComponent},
-    {path:'confirmPurshase',component:ConfirmPurshasesComponent},
-    {path:'orderHistory',component:OrderHistoryComponent},
+    {path:'confirmPurshase',component:ConfirmPurshasesComponent, canActivate: [AuthGuard]},
+    {path:'orderHistory',component:OrderHistoryComponent,canActivate: [AuthGuard]},
     { path: '**', redirectTo: '' } // redirecciona a Inicio si no encuentra ruta
 
 

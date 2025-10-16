@@ -57,6 +57,14 @@
   line-height: 1;    /* evita que se desplace raro */
 }
 
+.producto-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+  align-items:center;
+}
+
 ::ng-deep mat-option:hover {
   background-color: #303F9F!important;
   color: white !important;
@@ -119,9 +127,80 @@
   animation: fadeUp 0.4s ease-out forwards;
 }
 
+.producto{
+  animation: fadeIn 0.4s ease-out;
+  justify-content: center;
+  display: flex;
+  justify-content: center;
+}
+
+mat-form-field {
+  animation: fadeIn 0.3s ease-out;
+}
+
 @keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+
+@media (max-width: 600px) {
+  .producto-container {
+    align-items: center;
+    grid-template-columns: 1fr;
+    padding: 0.5rem;
+    gap: 1rem;
+  }
+
+  .producto {
+    padding: 12px;
+    justify-content: center;
+
+  }
+
+   .filtros-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important; /* aumenta el espacio entre filtros */
+    padding: 0 1rem; /* espacio lateral */
+  }
+
+  .filtro-categorias {
+    margin-bottom: 8px !important; /* espacio extra entre campos */
+  }
+
+  mat-form-field {
+    width: 100%;
+    margin: 0 auto; /* centra los campos */
+    display: block;
+  }
+
+  .filtro-categorias {
+    min-width: unset;
+  }
+
+  .boton-agregar-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-agregar {
+    width: 100%;
+  }
+
+  .shoppingcart {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .cart-label {
+    font-size: 12px;
+    right: 12px;
+    bottom: -4px;
   }
 }
