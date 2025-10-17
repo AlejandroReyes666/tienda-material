@@ -27,7 +27,7 @@
   <mat-card-actions class="card-actions">
     <div class="button">
       <ng-container *ngIf="cartItems$ | async as items">
-        <button class="btn-agregar" *ngIf="!isAdmin" mat-flat-button color="primary" (click)="addToCart(Product)">
+        <button class="btn-agregar" *ngIf="!isAdmin" mat-flat-button  (click)="addToCart(Product)">
           <ng-container *ngIf="isProductInCart(items, Product.id); else addIcon">
             <mat-icon>shopping_cart</mat-icon>
           </ng-container>
@@ -39,7 +39,7 @@
 
         <button  class="btn-eliminar-carrito"
                 *ngIf="isProductInCart(items, Product.id) && !isAdmin"
-                mat-flat-button color="null"
+                mat-flat-button 
                 (click)="removeOne(Product)">
           <mat-icon>delete</mat-icon>
           Eliminar
