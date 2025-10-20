@@ -98,3 +98,56 @@ quill-editor {
   display: block;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+:host {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+
+@media (max-width: 480px) {
+  .form-container {
+    padding: 1rem;
+  }
+
+  mat-card {
+    padding: 1rem;
+  }
+
+  mat-card-title,
+  .card-title {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .full-width {
+    margin-bottom: 1rem;
+  }
+
+  .enviar {
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 0.75rem;
+  }
+
+  .button-container {
+    margin-top: 1.5rem;
+  }
+
+  .quill-container {
+    padding: 6px;
+  }
+
+  quill-editor {
+    height: 180px;
+  }
+}
