@@ -10,12 +10,13 @@ import { CartComponent } from './features/cart/cart.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { ConfirmPurshasesComponent } from './features/confirm-purshases/confirm-purshases.component';
 import { OrderHistoryComponent } from './features/order-history/order-history.component';
+
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'products', component: ProductsComponent,canActivate: [AuthGuard] },
     { path: 'contact', component: ContactComponent },
-    { path: 'workwithus', component: WorkWithUsComponent },
+    { path: 'workwithus', component: ContactComponent },
     {path:'aboutus', component:AboutUsComponent},
     {path:'sales', component: SalesComponent}, // Asegúrate de importar SalesComponent en tu módulo
     {path:'shoppingcart',component:CartComponent},

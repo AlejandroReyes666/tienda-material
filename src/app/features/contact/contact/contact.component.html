@@ -1,5 +1,45 @@
-<app-contact-form
-  [mode]="'contact'"
-  (submitForm)="enviarFormulario($event)">
-</app-contact-form>
+<div class="contact-page">
+  <div class="contact-info">
+    <ng-container *ngIf="formContext === 'contact'">
+      <h2>Información de contacto</h2>
+      <div class="info-item">
+        <mat-icon>phone</mat-icon>
+        <span>(+57) 123 456 789</span>
+      </div>
+      <div class="info-item">
+        <mat-icon>email</mat-icon>
+        <span>info&#64;tiendas.com</span>
+      </div>
+      <div class="info-item">
+        <mat-icon>location_on</mat-icon>
+        <span>Calle Ficticia 123, Boyacá</span>
+      </div>
+    </ng-container>
 
+    <ng-container *ngIf="formContext === 'trabajo'">
+      <h2 class="work-title">¿Por qué trabajar con nosotros?</h2>
+      <p class="work-paragraph">En Tiendas, creemos en el talento, la colaboración y el impacto real.</p>
+      <p class="work-paragraph">Si querés formar parte de un equipo que transforma ideas en experiencias, este es tu lugar.</p>
+
+      <div class="info-item">
+        <mat-icon>groups</mat-icon>
+        <span>Ambiente colaborativo y oportunidades de crecimiento</span>
+      </div>
+      <div class="info-item">
+        <mat-icon>workspace_premium</mat-icon>
+        <span>Proyectos reales, impacto directo en usuarios</span>
+      </div>
+      <div class="info-item">
+        <mat-icon>emoji_events</mat-icon>
+        <span>Reconocimiento, mentoría y formación continua</span>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="form-wrapper" [ngClass]="{ 'work-mode': formContext === 'trabajo' }">
+    <app-contact-form
+      [mode]="formContext"
+      (submitForm)="enviarFormulario($event)">
+    </app-contact-form>
+  </div>
+</div>
