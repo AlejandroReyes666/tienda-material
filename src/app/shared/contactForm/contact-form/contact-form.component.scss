@@ -6,6 +6,11 @@
 mat-form-field.full-width {
   width: 100%;
   display: block;
+  transition: box-shadow 0.3s ease;
+}
+
+mat-form-field.mat-focused {
+  box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2);
 }
 
 .full-width {

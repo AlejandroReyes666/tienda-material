@@ -100,6 +100,31 @@ mat-icon {
   color: white;
 }
 
+
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    mat-icon {
+      font-size: 22px;
+      color: white;
+    }
+  }
+}
+
+
+
 @media (max-width: 768px) {
 
   .mobile-menu {

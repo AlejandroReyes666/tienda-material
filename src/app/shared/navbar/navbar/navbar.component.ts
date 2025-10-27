@@ -32,6 +32,7 @@ export class NavbarComponent {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   isMobile: boolean = false;
   contactExpanded = false;
+  isDarkTheme: boolean = false;
 
   constructor(private AuthService: AuthService,
               private router: Router,

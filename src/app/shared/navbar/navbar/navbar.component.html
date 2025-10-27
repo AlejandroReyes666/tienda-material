@@ -60,6 +60,7 @@
 
     <!-- Menú horizontal solo en desktop -->
     <div class="desktop-menu" *ngIf="!isMobile">
+      
       <!-- ...tus enlaces desktop -->
       <a mat-button routerLink="/" routerLinkActive="actived" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
       <a mat-button routerLink="/products" routerLinkActive="actived">Productos</a>
@@ -86,7 +87,24 @@
       <ng-template #showLogin>
         <a mat-button routerLink="/login">Login</a>
       </ng-template>
-  
+
+       <div class="toolbar-actions">
+        <button mat-icon-button [matMenuTriggerFor]="settingsMenu" aria-label="Preferencias">
+          <mat-icon>settings</mat-icon>
+        </button>
+
+      <mat-menu #settingsMenu="matMenu">
+        <button mat-menu-item >
+          <mat-icon>{{ isDarkTheme ? 'light_mode' : 'dark_mode' }}</mat-icon>
+          <span>{{ isDarkTheme ? 'Modo claro' : 'Modo oscuro' }}</span>
+        </button>
+        <button mat-menu-item >
+          <mat-icon>translate</mat-icon>
+          <span>Cambiar idioma</span>
+        </button>
+      </mat-menu>
+        
+      </div>
     </div>
   </mat-toolbar>
 
