@@ -1,0 +1,152 @@
+h2 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1b5e20;
+}
+
+.title {
+  text-align: center !important;
+  margin-top: 60px !important;
+  margin-bottom: 16px !important;
+}
+
+p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.order {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+  margin: 24px auto;
+  max-width: 640px;
+  transition: transform 0.2s ease;
+  animation: fadeIn 0.4s ease-out;
+  overflow: visible;
+}
+
+.order:hover {
+  transform: scale(1.01);
+}
+
+.order h3 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #212121;
+  margin-bottom: 12px;
+}
+
+.order p {
+  font-size: 1rem;
+  color: #424242;
+  margin: 6px 0;
+}
+
+.order p:first-of-type {
+  font-weight: 600;
+  color: #1b5e20;
+}
+
+.order-items {
+  margin-top: 16px;
+}
+
+.order-items h4 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #1565c0;
+  margin-bottom: 12px;
+}
+
+.order-items ul {
+  list-style: none;
+  padding: 0;
+}
+
+.order-items li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px dashed #ccc;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.order-items li:last-child {
+  border-bottom: none;
+}
+
+.order-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  background-color: #e3f2fd;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.order-id,
+.order-date,
+.order-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+  color: #212121;
+  flex: 1 1 auto;
+  min-width: 140px;
+}
+
+.order-badge {
+  justify-content: center;
+  background-color: #c8e6c9;
+  color: #256029;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: transform 0.2s ease;
+}
+
+.order-badge:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 400px) {
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-id,
+  .order-date,
+  .order-badge {
+    font-size: 0.9rem;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .order-badge {
+    margin-top: 4px;
+    align-self: flex-start;
+  }
+}
+
+/* ✅ Animación global */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

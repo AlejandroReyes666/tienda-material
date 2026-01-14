@@ -1,0 +1,256 @@
+
+
+.producto-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  padding: 24px;
+  background-color: #f9f9f9;
+}
+
+.producto {
+  height: 100%;
+  width: 280px;
+  flex: 0 0 auto;
+}
+
+.producto-card-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 320px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 16px;
+  overflow: hidden;
+  align-items: center;
+}
+
+.cantidad {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #F44336;
+  color: white;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.acciones {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  right: 16px;
+  transform: translateY(25%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subtotal {
+  position: static; /* Ya no es absolute */
+  background-color: #3F51B5;
+  color: white;
+  font-size: 0.75rem;
+  padding: 4px 6px;
+  border-radius: 8px;
+}
+
+.boton-agregar-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  flex-wrap: wrap
+}
+
+.remove-shoppingcart {
+  position: fixed;
+  background-color: #F44336;
+  color: white;
+  bottom: 40px;
+  right: 45px;
+  z-index: 1000;
+  font-size: 25px;
+  border-radius: 60%;
+}
+
+/* deja al ícono respirar */
+.remove-shoppingcart mat-icon {
+  font-size: 24px; 
+  line-height: 24px;
+}
+
+
+.remove-shoppingcart:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+
+.cart-total-card {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  width: 250px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  font-weight: bold;
+  color: #3F51B5;
+  background: white;     /* Fondo sólido */
+  z-index: 1100; /* Asegura que esté por encima de otros elementos */
+  
+}
+
+
+.cart-label {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: #F44336;
+  background-color: white;
+  padding: 4px 12px;
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 1001;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.cart-total-card h2 {
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+ 
+
+.cart-total-card mat-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.cart-total-card-mobile {
+  display: none; /* Oculto por defecto en escritorio */
+  margin: 24px auto;
+  width: 90%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  background-color: white;
+  padding: 16px;
+  text-align: center;
+  color: #3F51B5;
+  font-weight: bold;
+  
+}
+
+.cart-total-card-mobile h2 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+
+.btn-finalizar {
+  background-color: #3F51B5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+
+.btn-finalizar:hover {
+  background-color: #2e7d32;
+}
+
+@media (max-width: 480px) {
+  .producto-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .producto {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .producto-card-wrapper {
+    position: relative;
+    display: block;
+    width: 116% !important; 
+    min-height: 320px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 16px;
+    overflow: hidden;
+    align-items: center;
+  }
+
+  .cantidad {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 0.75rem;
+    padding: 3px 6px;
+  }
+
+  .acciones {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    gap: 8px;
+    width: 100%;
+    margin-left: 10px;
+  }
+
+  .subtotal {
+    font-size: 0.85rem;
+    background-color: #3F51B5;
+    color: white;
+    padding: 3px 12px;
+    border-radius: 8px;
+    text-align: center;
+    width: 50%;
+    margin-left: 30px;
+    
+  }
+
+  .btn-finalizar {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .remove-shoppingcart {
+    bottom: 33px;
+    right: 30px;
+  } 
+
+  .cart-total-card {
+    display: none; /* Oculta la versión fija en mobile */
+  }
+
+  .cart-total-card-mobile {
+    display: block; /* Muestra la versión fluida en mobile */
+  }
+
+  .cart-label {
+    font-size: 12px;
+    padding: 3px 10px;
+    bottom: 8px;
+    right: 8px;
+  }
+  
+}
+

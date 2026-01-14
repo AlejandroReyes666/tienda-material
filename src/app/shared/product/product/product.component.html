@@ -1,17 +1,59 @@
 <mat-card class="producto-card" appearance="outlined">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{ Product.nombre }}</mat-card-title>
-    <mat-card-subtitle>{{ Product.categoria }}</mat-card-subtitle>
+    <mat-card-title class="multiline">{{ Product.nombre }}</mat-card-title>
+    <mat-card-subtitle class="multiline">
+      <mat-chip class="multiline" selected>{{ Product.categoria }}</mat-chip>
+    </mat-card-subtitle>
+    
   </mat-card-header>
 
   <img
     mat-card-image
-    src="https://material.angular.dev/assets/img/examples/shiba2.jpg"
+    src={{Product.imageUrl}}
     alt="Foto del producto"
   />
 
   <mat-card-content>
-    <p>Agregar descripción</p>
+    <p>{{Product.descripcion}}</p>
+    <br>
+    <p class="precio"> 
+      <mat-chip color="accent" selected>
+        Precio: {{ isOfertaActiva(Product) ? Product.precioOferta : Product.precio }}
+      </mat-chip>
+    </p>
+  
   </mat-card-content>
+  <mat-card-actions class="card-actions">
+    <div class="button">
+      <ng-container *ngIf="cartItems$ | async as items">
+        <button class="btn-agregar" *ngIf="!isAdmin" mat-flat-button  (click)="addToCart(Product)">
+          <ng-container *ngIf="isProductInCart(items, Product.id); else addIcon">
+            <mat-icon>shopping_cart</mat-icon>
+          </ng-container>
+          <ng-template #addIcon>
+            <mat-icon>add_shopping_cart</mat-icon>
+          </ng-template>
+          {{ isProductInCart(items, Product.id) ? 'Agregar' : 'Añadir al carrito' }}
+        </button>
+
+        <button  class="btn-eliminar-carrito"
+                *ngIf="isProductInCart(items, Product.id) && !isAdmin"
+                mat-flat-button 
+                (click)="removeOne(Product)">
+          <mat-icon>delete</mat-icon>
+          Eliminar
+        </button>
+      </ng-container>
+
+      <button *ngIf="isAdmin" mat-flat-button class="btn-editar" (click)="actualizarProducto()">
+        <mat-icon>edit</mat-icon> Editar
+      </button>
+      <button *ngIf="isAdmin" mat-flat-button class="btn-eliminar" (click)="openDialogEliminar(Product)">
+        <mat-icon>delete</mat-icon> Eliminar
+      </button>
+    </div>
+  </mat-card-actions>
+
+  
 </mat-card>

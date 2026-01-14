@@ -1,0 +1,39 @@
+.card {
+  width: 300px;
+  margin: auto;
+  height: 100%;
+  display: flex;
+}
+
+.producto-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+mat-card-content {
+  flex-grow: 1; /* el contenido ocupa el espacio disponible */
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: center; /* centra el botón */
+  margin-top: auto; /* empuja el botón al fondo */
+}
+
+.btn-mas {
+  background-color: #3F51B5;
+  color: white;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+.btn-mas:hover {
+  background-color: #161c44;
+}

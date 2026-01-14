@@ -1,59 +1,56 @@
-# ProyectoMaterial
+📌 Descripción general Este proyecto es una tienda web tipo catálogo desarrollada en Angular 18 con componentes standalone. Permite a los usuarios ver productos organizados por categoría, explorar los detalles y acceder a estadísticas simples, como la cantidad de productos por categoría.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.4.
+Está inspirado en la experiencia de usuario de tiendas como D1, buscando ofrecer una interfaz moderna, limpia y fácil de navegar para cualquier tipo de cliente.
 
-## Development server
+🧩 Características principales 🛒 Catálogo de productos con nombre, categoría y precio.
 
-To start a local development server, run:
+🔍 Filtros por categoría.
 
-```bash
-ng serve
-```
+📁 Vista agrupada por categorías.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+📊 Vista de estadísticas básicas.
 
-## Code scaffolding
+🎨 Diseño limpio con Angular Material y paleta Google.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+📁 Módulos incluidos Inicio: Página de presentación.
 
-```bash
-ng generate component component-name
-```
+Productos: Lista de productos con filtros y visualización limpia.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Categorías: Vista agrupada por categoría.
 
-```bash
-ng generate --help
-```
+Estadísticas: Cantidad de productos por categoría.
 
-## Building
+Navbar: Navegación principal intuitiva y moderna.
 
-To build the project run:
+⚙️ Tecnologías utilizadas Angular 18 (Standalone)
 
-```bash
-ng build
-```
+Angular Material
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+TypeScript
 
-## Running unit tests
+SCSS
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+RxJS
 
-```bash
-ng test
-```
+Routing modular
 
-## Running end-to-end tests
+🎨 Paleta de colores sugerida Primario: Azul Google #1976d2
 
-For end-to-end (e2e) testing, run:
+Secundario: Gris claro #f5f5f5
 
-```bash
-ng e2e
-```
+Acento (Eliminar u opciones críticas): Rojo #e53935
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+📦 Próximas funcionalidades 📱 Diseño responsive para móviles.
 
-## Additional Resources
+🌍 Soporte multilenguaje.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+🔐 Panel privado (futuro): gestión CRUD solo para administradores.
+
+📊 Gráficas dinámicas en estadísticas.
+
+👤 Autor Mario Alejandro Reyes Medina Desarrollador frontend en formación. Proyecto personal tipo tienda para portafolio, enfocado en buenas prácticas de Angular moderno.
+
+📅 Fecha de inicio Jueves 24 de julio de 2025
+
+comando para inicializar el jason serve
+//json-server --watch db.json --port 3000

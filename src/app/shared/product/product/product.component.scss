@@ -1,21 +1,153 @@
+
 .producto-card {
-  width: 240px;
+  width: 280px;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border-radius: 12px;
+  overflow: hidden;
+  background-color: #fff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center; /* opcional para centrar */
+  margin: 0 auto;
+
 }
 
+.producto-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+}
+
+/* ✅ Hover con contraste corregido */
 .producto-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  background-color: #cce0ff;
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #3F51B5;
+  color: white;
 }
 
-.example-header-image {
-  background-image: url('https://material.angular.dev/assets/img/examples/shiba1.jpg');
-  background-size: cover;
-  background-position: center;
-  border-radius: 50%;
+/* ✅ Forzar color blanco en elementos internos usando ::ng-deep */
+::ng-deep .producto-card:hover .precio,
+::ng-deep .producto-card:hover .multiline,
+::ng-deep .producto-card:hover mat-card-title,
+::ng-deep .producto-card:hover mat-card-subtitle,
+::ng-deep .producto-card:hover mat-chip,
+::ng-deep .producto-card:hover mat-chip span {
+  color: white !important;
+}
+
+/* ✅ Ajustar fondo del chip en hover */
+::ng-deep .producto-card:hover mat-chip {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border: none;
+}
+
+/* ✅ Precio destacado */
+.precio {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.card-actions {
+  padding: 12px;
+}
+
+.button {
+  top: 50%;
+  left: 20px;
+  right: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-agregar,
+.btn-eliminar-carrito,
+.btn-editar,
+.btn-eliminar {
+  display: flex;              /* Ícono y texto en fila */
+  align-items: center;        /* Centrado vertical */
+  justify-content: center;    /* Centrado horizontal */
+  gap: 6px;                   /* Espacio entre ícono y texto */
+}
+
+.btn-agregar mat-icon,
+.btn-eliminar-carrito mat-icon,
+.btn-editar mat-icon,
+.btn-eliminar mat-icon {
+  font-size: 20px;            /* Tamaño uniforme */
+  margin: 0;                  /* Sin márgenes extra */
+}
+
+/* Botón: Agregar */
+.btn-agregar {
+  background-color: #27368d;
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 8px 12px;
+  flex: 1 1 50%;
+  min-width: 100px;
+}
+
+/* Botón: Eliminar */
+.btn-eliminar-carrito {
+  background-color: #F44336;
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 8px 12px;
+  flex: 1 1 45%;
+  min-width: 100px;
+}
+
+/* Botones de admin */
+.btn-editar,
+.btn-eliminar {
+  flex: 1 1 45%;
+  min-width: 120px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.btn-agregar mat-icon,
+.btn-eliminar-carrito mat-icon,
+.btn-editar mat-icon,
+.btn-eliminar mat-icon {
+  font-size: 20px;            /* Tamaño uniforme */
+  margin: 0;
+  vertical-align: middle;                  /* Sin márgenes extra */
+}
+
+.btn-editar {
+  background-color: #3F51B5;
+  color: white;
+}
+
+.btn-eliminar {
+  background-color: #F44336;
+  color: white;
+}
+
+/* Responsive para móvil */
+@media (max-width: 480px) {
+  .button {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .button button {
+    width: 100%;
+  }
 }

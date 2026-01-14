@@ -1,0 +1,21 @@
+<div class="confirmation-container" *ngIf="order">
+  <div class="confirmation-header">¡Gracias por tu compra!</div>
+
+  <div class="order-details">
+    <p><strong>Número de orden:</strong> {{ order.id }}</p>
+    <p><strong>Total pagado:</strong> ${{ order.total }} COP</p>
+    <p><strong>Fecha:</strong> {{ order.date | date:'short' }}</p>
+  </div>
+
+  <ul class="product-list">
+    <li *ngFor="let item of order.items">
+      <span>{{ item.product.nombre }} x{{ item.quantity }}</span>
+      <span>${{ item.product.precio * item.quantity }}</span>
+    </li>
+  </ul>
+
+  <div class="actions">
+    <button (click)="goToProducts()">🛒 Ver más productos</button>
+    <button (click)="goToOrderHistory()">📜 Ver historial de órdenes</button>
+  </div>
+</div>

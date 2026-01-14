@@ -1,1 +1,32 @@
-<p>home works!</p>
+<app-slider></app-slider>
+<section  class="servicios-section">
+  <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="2rem">
+    <mat-card *ngFor="let servicio of servicios" style="width: 280px;" @fadeIn>
+      <mat-card-header>
+        <mat-icon>{{ servicio.icono }}</mat-icon>
+        <br>
+        <mat-card-title>{{ servicio.titulo }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ servicio.descripcion }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>
+
+<div [ngClass]="{'cta-button-container':true, 'button-group':true}">
+  <button mat-raised-button class="shopping-buttom" (click)="verMas()">
+    <mat-icon>shopping_cart</mat-icon> Haz tu pedido ahora
+  </button>
+
+  <button mat-stroked-button color="primary"  class="sales-buttom" (click)="verOfertas()"> 
+    <mat-icon>local_offer</mat-icon> Nuestras ofertas
+  </button>
+</div>
+
+<section class="text-center my-5">
+  <h2 class="fw-bold">Nuestros Productos Destacados</h2>
+  <p class="text-muted">Una selección especial para ti</p>
+  <app-productos-destacados></app-productos-destacados>
+</section>
+

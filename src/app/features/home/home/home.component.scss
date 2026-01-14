@@ -1,0 +1,65 @@
+::ng-deep mat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  background-color: #3F51B5;
+  color: white;
+  mat-card-title{
+    color: white;
+  }
+}
+
+::ng-deep mat-card-title {
+  font-weight: 600;
+  color: #212121;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+
+.servicios-section {
+  padding: 2rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;  // ⬅️ centrado
+  gap: 1rem;                // ⬅️ espaciado entre botones
+  flex-wrap: wrap;          // ⬅️ que se adapten en pantallas pequeñas
+  margin-top: 2rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+
+.button-group button:hover {
+  transform: scale(1.05);
+}
+
+.cta-button-container {
+  width: 100%;
+  text-align: center;
+  margin-top: 2rem;
+
+  button {
+    font-size: 18px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: bold;
+  }
+
+  .shopping-buttom{
+    background-color: #1e7442;
+    color:white;
+  }
+
+  .sales-buttom{
+    background-color: #a51c0d;
+    color:white;
+    
+  }
+
+}
+
+

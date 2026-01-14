@@ -1,0 +1,17 @@
+<div class="title">
+  <h2 mat-dialog-title class="modal-header">
+    Eliminar Producto
+  </h2>
+
+</div>
+
+<div mat-dialog-content style="margin-bottom: 16px;">
+  ¿Estás seguro que deseas eliminar el producto?
+</div>
+<div [ngClass]="{'flex justify-end gap-2 mt-6' :true,'dialog-actions':true }" align="end">
+  <button mat-button type="button" class="btn-cancelar text-white px-4 py-2 rounded" 
+  (click)="cancel()" mat-dialog-close>Cancelar</button>
+  <button mat-button class="btn-eliminar" color="warn" (click)="delete()">Eliminar</button>
+</div>
+
+ 

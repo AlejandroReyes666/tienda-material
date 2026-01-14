@@ -3,31 +3,237 @@ import { ProductComponent } from '../../../shared/product/product/product.compon
 import { Producto } from '../../../core/models/ProductosModel';
 import { ProductoServiceService } from '../../../core/service/producto.service';
 import { CommonModule } from '@angular/common';
+import { ProductDialogComponent } from '../../../shared/productDialog/product-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormControl,ReactiveFormsModule } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import { MatSelectModule } from '@angular/material/select';
+import { AuthService } from '../../../core/service/auth.service';
+import{RouterModule} from '@angular/router';
+import { CartService } from '../../../core/service/cart.service';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-products',
-  imports: [CommonModule,ProductComponent],
+  standalone:true,
+  imports: [CommonModule, ProductComponent, ProductDialogComponent,
+    MatButtonModule, MatIconModule, MatAutocompleteModule,
+    MatInputModule, MatFormFieldModule, ReactiveFormsModule, MatSelectModule,RouterModule,
+    FormsModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
 export class ProductsComponent implements OnInit,OnDestroy{
+  categorias :string[]=[];
+  productos:Producto[]=[];
+  productosfiltrados:Producto[]=[];
+  todosLosProductos: Producto[] = [];
+  categoriaSeleccionada = '';
 
-  productos:Producto[]=[]
-  constructor(private serviceProducto:ProductoServiceService){}
+  myControl = new FormControl('');
+  filteredOptions!: Observable<string[]>;
+  value = '';
+  precioMinimo: number=0;
+  precioMaximo: number=Infinity;
+  isAdmin: boolean = false;
 
-  obtenerProductos(){
-    return this.serviceProducto.getProductos().subscribe(producto=>{
-      this.productos=producto;
 
-    })
+  constructor(private serviceProducto:ProductoServiceService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private authService: AuthService,
+    private cartService: CartService
+  ){}
+
+obtenerProductos() {
+  this.serviceProducto.getProductos().subscribe({
+    next: producto => {
+      this.todosLosProductos = producto;
+      this.productos = producto;
+    },
+    error: err => {
+      this.snackBar.open(err.message, 'Cerrar', {
+        duration: 5000,
+        panelClass: ['snackbar-error'],
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
+      });
+    }
+  });
+}
+
+
+obtenerCategorias(){
+  this.serviceProducto.getProductos().subscribe({
+    next: productos => {
+      this.categorias = [...new Set(productos.map(p => p.categoria))];
+      this.initAutocomplete();
+    },
+    error: err => {
+      this.snackBar.open(err.message, 'Cerrar', {
+        duration: 5000,
+        panelClass: ['snackbar-error'],
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
+      });
+    }
+  });
+}
+
+filtrarProductos() {
+  const nombreBuscado = this.value?.toLowerCase() || '';
+  const categoriaBuscada = this.categoriaSeleccionada?.toLowerCase() || '';
+
+  this.productos = this.todosLosProductos.filter(product => {
+    const coincideNombre = product.nombre.toLowerCase().includes(nombreBuscado);
+    const coincideCategoria = categoriaBuscada === '' || product.categoria?.toLowerCase().includes(categoriaBuscada);
+    const dentroRangoPrecio = product.precio >= this.precioMinimo && product.precio <= this.precioMaximo;
+
+    // El producto debe coincidir en nombre, categoría y estar dentro del rango de precio
+    return coincideNombre && coincideCategoria && dentroRangoPrecio;
+  });
+}
+
+
+openDialog(product?: Producto): void {
+  const dialogRef = this.dialog.open(ProductDialogComponent, {
+    width: '500px',
+    data: product || null
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      if (product) {
+        // Editar
+        this.serviceProducto.updateProduct(product.id, result).subscribe({
+          next: () =>{ 
+            this.snackBar.open('Producto Actualizado correctamente', 'Cerrar', {
+              duration: 3000,
+              panelClass: ['snackbar-success'],
+              horizontalPosition: 'right',
+              verticalPosition: 'top'
+            });
+            this.obtenerProductos()},
+          error: err => {
+            this.snackBar.open(`Error al actualizar: ${err.message}`, 'Cerrar', {
+              duration: 5000,
+              panelClass: ['snackbar-error'],
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom'
+            });
+          }
+        });
+      } else {
+        // Crear
+        this.serviceProducto.agregarProductos(result).subscribe({
+          next: () => {
+            this.snackBar.open('Producto creado correctamente', 'Cerrar', {
+              duration: 3000,
+              panelClass: ['snackbar-success'],
+              horizontalPosition: 'right',
+              verticalPosition: 'top'
+            });
+            this.obtenerProductos()
+          },
+          error: err => {
+            this.snackBar.open(`Error al crear: ${err.message}`, 'Cerrar', {
+              duration: 5000,
+              panelClass: ['snackbar-error'],
+              horizontalPosition: 'right',
+              verticalPosition: 'top'
+            });
+          }
+        });
+      }
+    }
+  });
+}
+
+
+eliminarProducto(id: number): void {
+  this.serviceProducto.deleteProduct(id).subscribe({
+    next: () => {
+      this.snackBar.open('Producto eliminado correctamente', 'Cerrar', {
+        duration: 3000,
+        panelClass: ['snackbar-success'],
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
+      });
+      this.obtenerProductos();
+    },
+    error: err => {
+      this.snackBar.open(`Error al eliminar: ${err.message}`, 'Cerrar', {
+        duration: 5000,
+        panelClass: ['snackbar-error'],
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
+      });
+    }
+  });
+}
+
+
+initAutocomplete(){
+  this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || ''))
+    );
+}
+
+
+private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.categorias.filter(option =>
+      option.toLowerCase().includes(filterValue)
+    );
   }
+
+  abrirAutocomplete() {
+    const value = this.myControl.value;
+    this.myControl.setValue(value ?? '');
+  }
+
+  resetform(){
+    this.myControl.reset();
+  }
+
+  isloggedIn(): boolean {
+    return this.authService.IsLoggedIn;
+  }
+
+
+  addToCart(product: Producto): void {
+  this.cartService.addToCart(product);
+  console.log("Producto añadido al carrito en products:", product);
+  this.snackBar.open(`${product.nombre} ha sido añadido al carrito.`, 'Cerrar', {
+    duration: 3000,
+    panelClass: ['snackbar-success'],
+    horizontalPosition: 'right',
+    verticalPosition: 'top'
+  });
+}
+
 
   ngOnInit(): void {
     this.obtenerProductos();
+    this.obtenerCategorias();
+    this.authService.role$.subscribe((role) => {
+      this.isAdmin = role === 'administrador';
+    });
+  
   }
 
+
+
   ngOnDestroy(): void {
-    this.obtenerProductos();
+    
   }
 }

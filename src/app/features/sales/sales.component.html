@@ -1,0 +1,18 @@
+
+<section class="text-center my-5">
+  <h2 class="fw-bold">Nuestros Productos En Oferta</h2>
+
+</section>
+
+<section *ngIf="productosEnOferta.length > 0; else sinProductos">
+  <div class="producto-container"> 
+    <div *ngFor="let producto of productosEnOferta" class="producto">
+        <app-product [Product]="producto"></app-product>
+    </div>
+  </div>
+</section>
+
+
+<ng-template #sinProductos>
+  <p>No hay productos en oferta.</p>
+</ng-template>

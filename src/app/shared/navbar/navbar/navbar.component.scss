@@ -1,17 +1,145 @@
+/* Navbar fijo */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 64px;
+  background-color: #303f9f;
+  color: white;
+}
+
+/* Espaciador */
 .spacer {
   flex: 1 1 auto;
 }
 
+/* Contenido debajo del navbar */
+.main-content {
+  margin-top: 64px;
+}
+
+/* Estilos activos */
 a.actived {
-  background-color: #cce0ff;
-  color: #0056b3;
+  background-color: #161c44;
+  color: white;
   border-radius: 999px;
   font-weight: 500;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
-
+/* Hover */
 a[mat-button]:hover {
   background-color: rgba(204, 224, 255, 0.3);
+}
+
+/* Colores base */
+a[mat-button],
+button[mat-button] {
+  color: white;
+}
+
+/* Menú horizontal en desktop */
+.desktop-menu {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+
+.mobile-menu {
+  width: 250px;
+  padding: 16px;
+  background-color: #f5f5f5;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.2);
+}
+
+a[mat-list-item] {
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 12px;
+  font-size: 16px;
+  color: #303f9f;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+a[mat-list-item]:hover {
+  background-color: rgba(48, 63, 159, 0.1);
+}
+
+a.active-link {
+  background-color: #303f9f;
+  color: white;
+}
+
+a.active-link mat-icon {
+  color: white;
+}
+
+mat-icon {
+  font-size: 20px;
+  color: #303f9f;
+}
+
+/* Responsive para mobile y tablets */
+.menu-button {
+  display: inline-flex !important;
+  background-color: transparent;
+  border: none;
+  color: white;
+  z-index: 2000;
+}
+
+.menu-icon {
+  font-size: 24px;
+  color: white;
+}
+
+
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    mat-icon {
+      font-size: 22px;
+      color: white;
+    }
+  }
+}
+
+
+
+@media (max-width: 768px) {
+
+  .mobile-menu {
+    margin-top: 64px;
+    height: calc(100vh - 64px);
+    overflow-y: auto;
+  }
+  .menu-button {
+    display: inline-flex;
+    color:white;
+  }
+
+  .desktop-menu {
+    display: none;
+  }
+
+  
 }

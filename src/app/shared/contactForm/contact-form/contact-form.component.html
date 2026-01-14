@@ -1,0 +1,58 @@
+<div class="form-container">
+    <mat-card class="contact-card">
+    <mat-card-header>
+        <mat-card-title class="card-title">Contactanos</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name" />
+            <mat-error *ngIf="errorMessages.name()">{{ errorMessages.name() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" />
+            <mat-error *ngIf="errorMessages.email()">{{ errorMessages.email() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Teléfono</mat-label>
+            <input matInput formControlName="phone" />
+            <mat-error *ngIf="errorMessages.phone()">{{ errorMessages.phone() }}</mat-error>
+        </mat-form-field>
+        <!-- Solo para "trabaja con nosotros" -->
+        <ng-container *ngIf="isWorkMode()">
+            <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Cargo de Interés</mat-label>
+            <input matInput formControlName="position" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+            <mat-label>LinkedIn (opcional)</mat-label>
+            <input matInput formControlName="linkedin" />
+            </mat-form-field>
+        </ng-container>
+
+        <div class="quill-container" [ngClass]="{'mat-focused': form.get('message')?.touched,'mat-error': form.get('message')?.invalid && form.get('message')?.touched}">
+            <quill-editor
+                formControlName="message"
+                aria-label="Editor de mensaje"
+                [modules]="{ toolbar: [['bold','italic','underline'], [{ 'list': 'ordered' }, { 'list': 'bullet' }], 
+                ['link'],[{ 'color': ['black', 'gray', 'blue', 'green', 'red', 'orange', 'purple'] }]] }"
+                [styles]="{ height: '200px' }"
+                placeholder="Escribe tu mensaje..."
+            ></quill-editor>
+        </div>
+
+       
+
+        <div class="button-container">
+            <button mat-raised-button class="enviar" color="primary" type="submit">Enviar</button>
+        </div>
+        
+        </form>
+        </mat-card-content>
+    </mat-card>
+</div>

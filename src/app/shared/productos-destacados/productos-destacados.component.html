@@ -1,0 +1,36 @@
+<ngx-slick-carousel *ngIf="productosDestacados.length > 0"
+                    class="carousel"
+                    [config]="slideConfig">
+
+  <div ngxSlickItem *ngFor="let producto of productosDestacados" class="slide">
+    <div class="card">
+        <mat-card class="producto-card" appearance="outlined">
+        <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title class="multiline">{{ producto.nombre }}</mat-card-title>
+        <mat-card-subtitle>{{ producto.categoria }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <img
+        mat-card-image
+        src={{producto.imageUrl}}
+        alt="Foto del producto"
+        />
+
+        <mat-card-content>
+            <p>{{producto.descripcion}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="button">
+                <button mat-flat-button class="btn-mas" (click)="verMas()">
+                    Ver Mas
+                </button>
+            </div>
+        </mat-card-actions> 
+        </mat-card>
+
+    </div>
+    
+  </div>
+
+</ngx-slick-carousel>

@@ -1,4 +1,66 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import 'quill/dist/quill.snow.css';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+::ng-deep .mat-dialog-container {
+  padding: 24px !important;
+}
+
+::ng-deep .mat-raised-button {
+  color: #3F51B5;
+}
+
+* {
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+}
+
+button:disabled,
+button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.mat-dialog-container {
+  font-family: 'Poppins', sans-serif;
+}
+
+.producto-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  padding: 24px;
+  background-color: #f9f9f9;
+}
+
+
+
+mat-card-title.multiline {
+ font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 0.5rem 0;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* máximo 2 líneas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 3rem; /* fuerza altura fija para alinear */
+  overflow: hidden;
+}
+
+
+
+mat-card-content p {
+  min-height: 20px; /* evita que descripciones cortas deformen la card */
+}
+
+

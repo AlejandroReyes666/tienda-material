@@ -1,12 +1,114 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- Menú lateral solo si es mobile -->
+  <mat-sidenav *ngIf="isMobile" #sidenav mode="over" class="mobile-menu">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>home</mat-icon>
+        <span>Inicio</span>
+      </a>
 
-    <mat-toolbar color="primary">
+      <a mat-list-item routerLink="/products" routerLinkActive="active-link">
+        <mat-icon>shopping_bag</mat-icon>
+        <span>Productos</span>
+      </a>
+
+      <a mat-list-item routerLink="/aboutus" routerLinkActive="active-link">
+        <mat-icon>info</mat-icon>
+        <span>Conócenos</span>
+      </a>
+
+      <a mat-list-item (click)="toggleContactMenu()">
+        <mat-icon>contact_mail</mat-icon>
+        <span>Contáctanos</span>
+        <mat-icon>{{ contactExpanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+      </a>
+
+      <!-- Submenú desplegable -->
+      <mat-nav-list *ngIf="contactExpanded" class="submenu">
+        <a mat-list-item routerLink="/contact" routerLinkActive="active-link">
+          <mat-icon>support_agent</mat-icon>
+          <span>Atención al cliente</span>
+        </a>
+
+        <a mat-list-item routerLink="/workwithus" routerLinkActive="active-link">
+          <mat-icon>work</mat-icon>
+          <span>Trabaja con Nosotros</span>
+        </a>
+      </mat-nav-list>
+      
+      <a mat-list-item routerLink="/orderHistory" routerLinkActive="active-link">
+        <mat-icon>receipt_long</mat-icon>
+        <span>Mis compras</span>
+      </a>
+
+      <a mat-list-item (click)="handleAuthAction()">
+        <mat-icon>logout</mat-icon>
+        <span>Cerrar sesión</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Navbar fijo -->
+  <mat-toolbar color="primary" class="navbar">
+    <!-- Botón hamburguesa solo si es mobile -->
+    <button  mat-icon-button (click)="sidenav.toggle()" class="menu-button" aria-label="Abrir menú">
+      <mat-icon   *ngIf="isMobile" class="menu-icon">menu</mat-icon> 
+    </button>
+
     <span>Tiendas</span>
     <span class="spacer"></span>
-    <a mat-button routerLink="/" routerLinkActive="actived" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
-    <a mat-button routerLink="/login" routerLinkActive="actived">Login</a>
-    <a mat-button routerLink="/products" routerLinkActive="actived">Productos</a>
-    <a mat-button routerLink="/aboutus" routerLinkActive="actived">Conócenos</a>
-    <a mat-button routerLink="/contact" routerLinkActive="actived">Contáctanos</a>
-    </mat-toolbar>
 
+    <!-- Menú horizontal solo en desktop -->
+    <div class="desktop-menu" *ngIf="!isMobile">
+      
+      <!-- ...tus enlaces desktop -->
+      <a mat-button routerLink="/" routerLinkActive="actived" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
+      <a mat-button routerLink="/products" routerLinkActive="actived">Productos</a>
+      <a mat-button routerLink="/aboutus" routerLinkActive="actived">Conócenos</a>
+      <a mat-button [matMenuTriggerFor]="menu" routerLinkActive="actived">Contáctanos</a>
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item routerLink="/contact">Atención al cliente</a>
+        <a mat-menu-item routerLink="/workwithus">Trabaja con Nosotros</a>
+      </mat-menu>
 
+      <ng-container *ngIf="isLoggedIn; else showLogin">
+        <button mat-button [matMenuTriggerFor]="userMenu" aria-label="Menú de usuario">
+          {{ username || 'Usuario' }}
+        </button>
+        <mat-menu #userMenu="matMenu">
+          <a mat-menu-item routerLink="/orderHistory">
+            <mat-icon>receipt_long</mat-icon>
+            <span>Mis compras</span>
+          </a>
+          <button mat-menu-item (click)="handleAuthAction()">Cerrar sesión</button>
+        </mat-menu>
+      </ng-container>
+
+      <ng-template #showLogin>
+        <a mat-button routerLink="/login">Login</a>
+      </ng-template>
+
+       <div class="toolbar-actions">
+        <button mat-icon-button [matMenuTriggerFor]="settingsMenu" aria-label="Preferencias">
+          <mat-icon>settings</mat-icon>
+        </button>
+
+      <mat-menu #settingsMenu="matMenu">
+        <button mat-menu-item >
+          <mat-icon>{{ isDarkTheme ? 'light_mode' : 'dark_mode' }}</mat-icon>
+          <span>{{ isDarkTheme ? 'Modo claro' : 'Modo oscuro' }}</span>
+        </button>
+        <button mat-menu-item >
+          <mat-icon>translate</mat-icon>
+          <span>Cambiar idioma</span>
+        </button>
+      </mat-menu>
+        
+      </div>
+    </div>
+  </mat-toolbar>
+
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>
